@@ -15,7 +15,7 @@ class AdminsController {
     );
 
     res.status(201).json({
-      message: `${returnValue.dataValues.name}관리자가 생성되었습니다`,
+      message: `${returnValue.name}관리자가 생성되었습니다`,
     });
   };
 
@@ -31,12 +31,67 @@ class AdminsController {
       res
         .status(returnValue.code)
         .json({ errorMessage: returnValue.errorMessage });
+      return;
     }
 
-    res.cookie(returnValue.accessToken);
-    res.cookie(returnValue.refreshToken);
+    res.cookie('accessToken', returnValue.accessToken);
+    res.cookie('refreshToken', returnValue.refreshToken);
 
     res.status(200).json({ message: '관리자가 로그인했습니다' });
+  };
+
+  addProduct = async (req, res) => {
+    const { inputName, inputPrice, inputDesc, inputImage, inputQuantity } =
+      req.body;
+    const { adminId } = req.adminInfo;
+
+    const returnValue = await this.adminsServices.addProduct(
+      inputName,
+      inputPrice,
+      inputDesc,
+      inputImage,
+      inputQuantity,
+      adminId
+    );
+
+    if (checkErrorMessage(returnValue)) {
+      res
+        .status(returnValue.code)
+        .json({ errorMessage: returnValue.errorMessage });
+    }
+
+    res.status(201).json({ message: '상품이 추가되었습니다' });
+  };
+
+  editProduct = async (req, res) => {
+    const {
+      inputName,
+      inputPrice,
+      inputDesc,
+      inputImage,
+      inputQuantity,
+      productId,
+    } = req.body;
+
+    const { adminId } = { adminId: 1 };
+
+    const returnValue = await this.adminsServices.editProduct(
+      inputName,
+      inputPrice,
+      inputDesc,
+      inputImage,
+      inputQuantity,
+      adminId,
+      productId
+    );
+
+    if (checkErrorMessage(returnValue)) {
+      res
+        .status(returnValue.code)
+        .json({ errorMessage: returnValue.errorMessage });
+    }
+
+    res.status(201).json({ message: '상품이 수정 되었습니다.' });
   };
 }
 

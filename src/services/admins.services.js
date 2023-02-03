@@ -42,9 +42,9 @@ class AdminsServices {
     const accessToken = jwt.sign(
       {
         type: 'JWT',
-        adminId: returnValue.dataValues.id,
-        accountId: returnValue.dataValues.account,
-        rating: returnValue.dataValues.rating,
+        adminId: returnValue.id,
+        accountId: returnValue.account,
+        rating: returnValue.rating,
       },
       process.env.ACCESS_JWT_SECRET_KEY,
       {
@@ -55,9 +55,9 @@ class AdminsServices {
     const refreshToken = jwt.sign(
       {
         type: 'JWT',
-        adminId: returnValue.dataValues.id,
-        accountId: returnValue.dataValues.account,
-        rating: returnValue.dataValues.rating,
+        adminId: returnValue.id,
+        accountId: returnValue.account,
+        rating: returnValue.rating,
       },
       process.env.REFRESH_JWT_SECRET_KEY,
       {
@@ -66,6 +66,48 @@ class AdminsServices {
     );
 
     return { accessToken, refreshToken };
+  };
+
+  addProduct = async (
+    inputName,
+    inputPrice,
+    inputDesc,
+    inputImage,
+    inputQuantity,
+    adminId
+  ) => {
+    const returnValue = await this.adminRepositories.addProduct(
+      inputName,
+      inputPrice,
+      inputDesc,
+      inputImage,
+      inputQuantity,
+      adminId
+    );
+
+    return returnValue;
+  };
+
+  editProduct = async (
+    inputName,
+    inputPrice,
+    inputDesc,
+    inputImage,
+    inputQuantity,
+    adminId,
+    productId
+  ) => {
+    const returnValue = await this.adminRepositories.editProduct(
+      inputName,
+      inputPrice,
+      inputDesc,
+      inputImage,
+      inputQuantity,
+      adminId,
+      productId
+    );
+
+    return returnValue;
   };
 }
 

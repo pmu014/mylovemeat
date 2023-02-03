@@ -1,0 +1,41 @@
+<%- include('../includes/head.ejs') %>
+  <script src="/js/admin-edit-product.js"></script>
+  <link rel="stylesheet" href="/css/admin.css">
+  <title>관리자 - 상품추가</title>
+  </head>
+
+  <body>
+    <div id="addProductBox">
+      <h1>상품 추가</h1>
+      <div class="mb-3">
+        <label for="inputName" class="form-label">상품 이름</label>
+        <input type="text" class="form-control" id="inputName">
+      </div>
+      <div class="mb-3">
+        <label for="inputPrice" class="form-label">상품 가격</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="inputPrice"></input>
+          <span class="input-group-text">원</span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="inputQuantity" class="form-label">상품 수량</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="inputQuantity"></input>
+          <span class="input-group-text">개</span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="inputImage" class="form-label">썸네일 이미지</label>
+        <input type="file" class="form-control" id="inputImage" name="inputImage">
+      </div>
+      <div class="mb-3">
+        <label for="inputDesc" class="form-label">상품 소개</label>
+        <textarea class="form-control" id="inputDesc"></textarea>
+      </div>
+      <button type="button" class="btn btn-primary" id="editProductBtn" value="<%= productId %>">상품 수정</button>
+    </div>
+
+  </body>
+
+  </html>

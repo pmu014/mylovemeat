@@ -22,6 +22,36 @@ class AdminRepositories {
 
     return returnValue;
   };
+
+  addProduct = async (name, price, description, img, quantity, adminId) => {
+    const returnValue = await this.Product.create({
+      name,
+      price,
+      description,
+      img,
+      quantity,
+      adminId,
+    });
+
+    return returnValue;
+  };
+
+  editProduct = async (
+    name,
+    price,
+    description,
+    img,
+    quantity,
+    adminId,
+    productId
+  ) => {
+    const returnValue = await this.Product.update(
+      { name, price, description, img, quantity, adminId },
+      { where: { id: productId } }
+    );
+
+    return returnValue;
+  };
 }
 
 module.exports = AdminRepositories;

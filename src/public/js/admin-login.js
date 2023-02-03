@@ -16,9 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
       .then((response) => {
         const data = response.data;
         alert(data.message);
+        window.location.href = '/admin_index';
       })
-      .catch(() => {
-        console.log('실패');
+      .catch((response) => {
+        console.log(response);
       });
   });
 });
