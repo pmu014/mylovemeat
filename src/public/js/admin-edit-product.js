@@ -1,35 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const addProductBtn = document.getElementById('addProductBtn');
+  let inputName = document.getElementById('inputName');
+  let inputPrice = document.getElementById('inputPrice');
+  let inputDesc = document.getElementById('inputDesc');
+  let inputQuantity = document.getElementById('inputQuantity');
+  const editProductBtn = document.getElementById('editProductBtn');
+  const productId = editProductBtn.value;
 
-  addProductBtn.addEventListener('click', () => {
-    const inputName = document.getElementById('inputName').value;
-    const inputPrice = document.getElementById('inputPrice').value;
-    const inputImage = document.getElementsByName('inputImage')[0];
-    const inputDesc = document.getElementById('inputDesc').value;
-    const inputQuantity = document.getElementById('inputQuantity').value;
+  axios({
+    method: 'get',
+    url: '/api/products/' + productId,
+    data: {},
+  })
+    .then((response) => {
+      const data = response.data;
 
-    const formData = new FormData();
+      inputName.setAttribute('value', data.returnValue.name);
+      inputPrice.setAttribute('value', data.returnValue.price);
+      inputDesc.append(data.returnValue.description);
+      inputQuantity.setAttribute('value', data.returnValue.quantity);
 
-    formData.append('inputName', inputName);
-    formData.append('inputPrice', inputPrice);
-    formData.append('inputImage', inputImage.files[0]);
-    formData.append('inputDesc', inputDesc);
-    formData.append('inputQuantity', inputQuantity);
+      editProductBtn.addEventListener('click', () => {
+        let inputName = document.getElementById('inputName').value;
+        let inputPrice = document.getElementById('inputPrice').value;
+        let inputImage = document.getElementsByName('inputImage')[0];
+        let inputDesc = document.getElementById('inputDesc').value;
+        let inputQuantity = document.getElementById('inputQuantity').value;
+        let formData = new FormData();
 
-    axios({
-      headers: {
-        'Content-Type': 'multipart/form-data; charset=UTF-8',
-      },
-      method: 'post',
-      url: 'api/admins/products',
-      data: formData,
-    })
-      .then((response) => {
-        const data = response.data;
-        alert(data.message);
-      })
-      .catch((response) => {
-        console.log(response);
+        formData.append('inputName', inputName);
+        formData.append('inputPrice', inputPrice);
+        formData.append('inputImage', inputImage.files[0]);
+        formData.append('inputDesc', inputDesc);
+        formData.append('inputQuantity', inputQuantity);
+        formData.append('productId', productId);
+
+        axios({
+          headers: {
+            'Content-Type': 'multipart/form-data; charset=UTF-8',
+          },
+          method: 'put',
+          url: 'api/admins/products',
+          data: formData,
+        })
+          .then((response) => {
+            const data = response.data;
+            alert(data.message);
+          })
+          .catch((response) => {
+            console.log(response);
+          });
       });
-  });
+    })
+    .catch((response) => {
+      console.log(response);
+    });
 });

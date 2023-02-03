@@ -8,6 +8,12 @@ class ProductsRepositories {
 
     return returnValue;
   };
+
+  getProduct = async (productId) => {
+    const returnValue = await this.Product.findByPk(productId);
+
+    return returnValue;
+  };
 }
 
 module.exports = ProductsRepositories;

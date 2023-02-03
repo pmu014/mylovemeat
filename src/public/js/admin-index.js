@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (const editBtn of editBtns) {
           const productId = editBtn.value;
           editBtn.addEventListener('click', () => {
-            window.location.href = '/admin_edit_product/' + productId;
+            window.location.href = '/admin_edit_product?productId=' + productId;
           });
         }
       });

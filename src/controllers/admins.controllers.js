@@ -64,6 +64,7 @@ class AdminsController {
   };
 
   editProduct = async (req, res) => {
+    console.log('클릭!');
     const {
       inputName,
       inputPrice,
@@ -72,6 +73,15 @@ class AdminsController {
       inputQuantity,
       productId,
     } = req.body;
+
+    console.log(
+      inputName,
+      inputPrice,
+      inputDesc,
+      inputImage,
+      inputQuantity,
+      productId
+    );
 
     const { adminId } = { adminId: 1 };
 

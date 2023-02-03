@@ -7,9 +7,11 @@ const imagePath = path.join(__dirname, '../', 'public', 'images');
 
 const imageStorage = multer.diskStorage({
   destination: (req, file, cb) => {
+    console.log(1);
     cb(null, imagePath);
   },
   filename: (req, file, cb) => {
+    console.log(2);
     req.body.inputImage =
       req.body.inputName.replace(/ /g, '-') +
       '-' +

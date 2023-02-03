@@ -8,6 +8,14 @@ class ProductsController {
 
     res.status(200).json({ returnValue });
   };
+
+  getProduct = async (req, res) => {
+    const { productId } = req.params;
+
+    const returnValue = await this.productsServices.getProduct(productId);
+
+    res.status(200).json({ returnValue });
+  };
 }
 
 module.exports = ProductsController;

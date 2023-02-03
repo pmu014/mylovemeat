@@ -9,6 +9,12 @@ class ProductsServices {
 
     return returnValue;
   };
+
+  getProduct = async (productId) => {
+    const returnValue = await this.productsRepositories.getProduct(productId);
+
+    return returnValue;
+  };
 }
 
 module.exports = ProductsServices;

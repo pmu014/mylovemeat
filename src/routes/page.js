@@ -18,9 +18,11 @@ router.get('/admin_add_product', (req, res) => {
   res.render('admins/admin-add-product');
 });
 
-router.get('/admin_edit_product/:productId', (req, res) => {
-  const { productId } = req.params;
-  res.render('admins/admin-add-product', { productId });
+router.get('/admin_edit_product', (req, res) => {
+  const { productId } = req.query;
+  console.log(productId);
+
+  res.render('admins/admin-edit-product', { productId });
 });
 
 module.exports = router;
