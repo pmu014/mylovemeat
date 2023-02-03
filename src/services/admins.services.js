@@ -35,8 +35,37 @@ class AdminsServices {
       returnValue.dataValues.salt
     );
 
-    console.log('비밀번호 체크', checkPassword);
-    return returnValue;
+    if (!checkPassword) {
+      return { code: '400', errorMessage: 'Login Fail' };
+    }
+
+    const accessToken = jwt.sign(
+      {
+        type: 'JWT',
+        adminId: returnValue.dataValues.id,
+        accountId: returnValue.dataValues.account,
+        rating: returnValue.dataValues.rating,
+      },
+      process.env.ACCESS_JWT_SECRET_KEY,
+      {
+        expiresIn: '5m',
+      }
+    );
+
+    const refreshToken = jwt.sign(
+      {
+        type: 'JWT',
+        adminId: returnValue.dataValues.id,
+        accountId: returnValue.dataValues.account,
+        rating: returnValue.dataValues.rating,
+      },
+      process.env.REFRESH_JWT_SECRET_KEY,
+      {
+        expiresIn: '5h',
+      }
+    );
+
+    return { accessToken, refreshToken };
   };
 }
 

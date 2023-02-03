@@ -1,5 +1,7 @@
 const AdminsServices = require('../services/admins.services');
 
+const checkErrorMessage = require('../utills/check-errorMessage');
+
 class AdminsController {
   adminsServices = new AdminsServices();
 
@@ -24,6 +26,15 @@ class AdminsController {
       inputAccount,
       inputPassword
     );
+
+    if (checkErrorMessage(returnValue)) {
+      res
+        .status(returnValue.code)
+        .json({ errorMessage: returnValue.errorMessage });
+    }
+
+    res.cookie(returnValue.accessToken);
+    res.cookie(returnValue.refreshToken);
 
     res.status(200).json({ message: '관리자가 로그인했습니다' });
   };
