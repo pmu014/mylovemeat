@@ -25,6 +25,14 @@ module.exports = {
         productId: {
           type: Sequelize.INTEGER,
         },
+        quantity:{
+          allowNull: false,
+          type: Sequelize.STRING,
+        },
+        status:{
+          allowNull: false,
+          type: Sequelize.STRING,
+        },
         userId: {
           type: Sequelize.INTEGER,
         },

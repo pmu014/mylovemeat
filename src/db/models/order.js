@@ -35,6 +35,14 @@ module.exports = (sequelize, DataTypes) => {
       productId: {
         type: DataTypes.INTEGER,
       },
+      quantity:{
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
+      status:{
+        allowNull: false,
+        type: DataTypes.STRING,
+      },
       userId: {
         type: DataTypes.INTEGER,
       },
