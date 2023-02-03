@@ -26,6 +26,10 @@ module.exports = {
           allowNull: false,
           type: Sequelize.TEXT,
         },
+        quantity: {
+          allowNull: false,
+          type: Sequelize.INTEGER,
+        },
         adminId: {
           allowNull: false,
           type: Sequelize.INTEGER,
