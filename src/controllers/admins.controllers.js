@@ -43,7 +43,7 @@ class AdminsController {
   addProduct = async (req, res) => {
     const { inputName, inputPrice, inputDesc, inputImage, inputQuantity } =
       req.body;
-    const { adminId } = req.adminInfo;
+    const { adminId } = { adminId: 1 };
 
     const returnValue = await this.adminsServices.addProduct(
       inputName,
@@ -102,6 +102,27 @@ class AdminsController {
     }
 
     res.status(201).json({ message: '상품이 수정 되었습니다.' });
+  };
+
+  delProduct = async (req, res) => {
+    const { productId } = req.params;
+
+    const returnValue = await this.adminsServices.delProduct(productId);
+
+    if (checkErrorMessage(returnValue)) {
+      res
+        .status(returnValue.code)
+        .json({ errorMessage: returnValue.errorMessage });
+    }
+
+    res.status(204).end();
+  };
+
+  logoutAdmin = async (req, res) => {
+    res.clearCookie('accessToken');
+    res.clearCookie('refreshToken');
+
+    res.status(204).end();
   };
 }
 

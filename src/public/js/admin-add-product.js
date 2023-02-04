@@ -16,9 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
     formData.append('inputDesc', inputDesc);
     formData.append('inputQuantity', inputQuantity);
 
+    console.log(formData);
     axios({
       headers: {
-        'Content-Type': 'multipart/form-data; charset=UTF-8',
+        'Content-Type': 'multipart/form-data',
       },
       method: 'post',
       url: 'api/admins/products',
@@ -27,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then((response) => {
         const data = response.data;
         alert(data.message);
+        window.location.href = '/admin_index';
       })
       .catch((response) => {
         console.log(response);

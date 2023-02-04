@@ -1,3 +1,6 @@
+const path = require('path');
+const fs = require('fs');
+
 const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
@@ -107,6 +110,27 @@ class AdminsServices {
       productId
     );
 
+    return returnValue;
+  };
+
+  delProduct = async (productId) => {
+    const returnValue = await this.adminRepositories.delProduct(productId);
+
+    const imgPath = path.join(
+      __dirname,
+      '../',
+      'public',
+      'images',
+      returnValue.img
+    );
+
+    if (!returnValue.returnValue) {
+      return { code: 404, errorMessage: '상품을 찾을 수 없습니다' };
+    }
+
+    if (fs.existsSync(imgPath)) {
+      fs.unlinkSync(imgPath);
+    }
     return returnValue;
   };
 }

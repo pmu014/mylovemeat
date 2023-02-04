@@ -20,23 +20,33 @@ document.addEventListener('DOMContentLoaded', () => {
       inputQuantity.setAttribute('value', data.returnValue.quantity);
 
       editProductBtn.addEventListener('click', () => {
-        let inputName = document.getElementById('inputName').value;
-        let inputPrice = document.getElementById('inputPrice').value;
-        let inputImage = document.getElementsByName('inputImage')[0];
-        let inputDesc = document.getElementById('inputDesc').value;
-        let inputQuantity = document.getElementById('inputQuantity').value;
-        let formData = new FormData();
+        inputName = document.getElementById('inputName').value;
+        inputPrice = document.getElementById('inputPrice').value;
+        inputDesc = document.getElementById('inputDesc').value;
+        inputQuantity = document.getElementById('inputQuantity').value;
+        const inputImage = document.getElementsByName('inputImage')[0];
+
+        const formData = new FormData();
 
         formData.append('inputName', inputName);
         formData.append('inputPrice', inputPrice);
-        formData.append('inputImage', inputImage.files[0]);
+
+        if (inputImage.files[0]) {
+          console.log(inputImage.files[0]);
+          formData.append('inputImage', inputImage.files[0]);
+        } else {
+          console.log(data.returnValue.img);
+          formData.append('inputImage', data.returnValue.img);
+        }
+
         formData.append('inputDesc', inputDesc);
         formData.append('inputQuantity', inputQuantity);
         formData.append('productId', productId);
 
+        console.log(formData);
         axios({
           headers: {
-            'Content-Type': 'multipart/form-data; charset=UTF-8',
+            'Content-Type': 'multipart/form-data',
           },
           method: 'put',
           url: 'api/admins/products',
@@ -45,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
           .then((response) => {
             const data = response.data;
             alert(data.message);
+            window.location.href = '/admin_index';
           })
           .catch((response) => {
             console.log(response);

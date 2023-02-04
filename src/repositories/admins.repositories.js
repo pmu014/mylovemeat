@@ -52,6 +52,18 @@ class AdminRepositories {
 
     return returnValue;
   };
+
+  delProduct = async (productId) => {
+    const { img } = await this.Product.findOne({
+      where: { id: productId },
+      attributes: ['img'],
+    });
+    const returnValue = await this.Product.destroy({
+      where: { id: productId },
+    });
+
+    return { returnValue, img };
+  };
 }
 
 module.exports = AdminRepositories;

@@ -142,3 +142,8 @@
 #productsBox > .items > .itemImage > img {
   width: 100%;
 }
+
+#editProductBtn {
+  width: 200px;
+  margin: 0 auto;
+}

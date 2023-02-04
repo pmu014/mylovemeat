@@ -5,13 +5,31 @@ require('dotenv').config();
 const authToken = (req, res, next) => {
   const { accessToken, refreshToken } = req.cookies;
 
+  if (!accessToken || !refreshToken) {
+    res.send(
+      "<script>alert('로그인 후 이용 가능합니다.');location.href='/admin_login';</script>"
+    );
+  }
+
+  console.log(
+    verifyRefreshToken(accessToken),
+    verifyRefreshToken(refreshToken)
+  );
+
   if (!verifyAccessToken(accessToken)) {
     if (!verifyRefreshToken(refreshToken)) {
       res.clearCookie('accessToken');
       res.clearCookie('refreshToken');
 
-      return res.status(400).json({ errorMessage: '로그인이 만료되었습니다.' });
+      res.send(
+        "<script>alert('로그인 후 이용 가능합니다.');location.href='/admin_login';</script>"
+      );
     }
+
+    const refreshTokenInfo = jwt.verify(
+      refreshToken,
+      process.env.REFRESH_JWT_SECRET_KEY
+    );
 
     const accessToken = jwt.sign(
       {
@@ -28,8 +46,30 @@ const authToken = (req, res, next) => {
 
     res.cookie('accessToken', accessToken);
   }
+  console.log('체크1');
+  const accessTokenInfo = jwt.verify(
+    accessToken,
+    process.env.ACCESS_JWT_SECRET_KET
+  );
+  if (!verifyRefreshToken(refreshToken)) {
+    const refreshToken = jwt.sign(
+      {
+        type: 'JWT',
+        adminId: accessTokenInfo.adminId,
+        accountId: accessTokenInfo.accountId,
+        rating: accessTokenInfo.rating,
+      },
+      process.env.REFRESH_JWT_SECRET_KEY,
+      {
+        expiresIn: '5h',
+      }
+    );
 
-  req.adminInfo = jwt.verify(accessToken, process.env.ACCESS_JWT_SECRET_KET);
+    res.cookie('refreshToken', refreshToken);
+  }
+
+  console.log('체크2');
+  req.adminInfo = accessTokenInfo;
   next();
 };
 
@@ -50,3 +90,5 @@ const verifyRefreshToken = function (refreshToken) {
     return false;
   }
 };
+
+module.exports = authToken;
