@@ -13,7 +13,15 @@ const mypageRouter = require("./src/routes/mypage.js")
 //     database: 'mylovemeat'
 // };
 
+app.get("/mypage", (req, res) => { 
+  res.render("mypage.ejs")
+})
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'src', 'views'));
+
 app.use("/api", mypageRouter);
+// app.use(express.static(path.join(__dirname, 'src', 'public')));
 
 
 // app.get("/", (req,res)=> {

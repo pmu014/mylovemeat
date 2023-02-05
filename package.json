@@ -1,10 +1,11 @@
 {
   "name": "mylovemeat",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon prac.js",
+    "strat-server": "node prac.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,7 @@
   "dependencies": {
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "mysql": "^2.18.1",
@@ -21,5 +23,14 @@
   "devDependencies": {
     "nodemon": "^2.0.20",
     "sequelize-cli": "^6.6.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pmu014/mylovemeat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pmu014/mylovemeat/issues"
+  },
+  "homepage": "https://github.com/pmu014/mylovemeat#readme",
+  "description": ""
 }
