@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+* {
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+hr{
+  border:solid 1px;
+}
+.products-box{
+  border: 2px solid lavender;
+  width: 1470px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.products_detail{
+  border: 2px solid lavender;
+  width: 1500px;
+  margin: 0 auto;
+  display: flex;
+}
+.my-btn{
+  width:100px
+}
+.main-css{
+  max-width:1450px;
+  margin : 100px 0px 0px 220px;
+  display: flex;
+  justify-content: space-between;
+ 
+}
+.btn-css{
+  width: 350px;
+  height: 100px;
+}
+.btn-css2{
+  margin-top: 10px;
+}
+.products-img{
+  margin: 0px 50px 50px 0px;
+  text-align: center;
+  font-size: large;
+}
+.form-label{
+  font-size: large;
+}
+#registerBox > h1 {
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+
+#registerBox {
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+
+  border: 2px solid lavender;
+  border-radius: 20px;
+
+  box-shadow: 3px 3px 5px lavender;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#registerBtn {
+  width: 200px;
+  margin: 0 auto;
+}
+
+#loginBox > h1 {
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+
+#loginBox {
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+
+  border: 2px solid lavender;
+  border-radius: 20px;
+
+  box-shadow: 3px 3px 5px lavender;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#loginBtn {
+  width: 200px;
+  margin: 0 auto;
+}
