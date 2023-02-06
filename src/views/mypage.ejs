@@ -1,6 +1,4 @@
 
-
-
 <head>
   <script>
     src = "https://code.jquery.com/jquery-3.6.3.js";
@@ -8,45 +6,10 @@
     crossorigin = "anonymous";</script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
-  <link rel="stylesheet" href="/css/admin.css">
+
   <title>마이페이지</title>
 </head>
 <!-- ///에이젝스로 append  -->
-<script>
-
-        function q1() {
-            $('#names-q1').empty();
-            $.ajax({
-                type: "GET",
-                url: "/user",
-                data: {},
-                success: function (response) {
-                    let rows = response["getStationList"]["row"];
-                    for (let i = 0; i < rows.length; i++) {
-                        let rack_name = rows[i]['stationName'];
-                        let rack_cnt = rows[i]['rackTotCnt'];
-                        let bike_cnt = rows[i]['parkingBikeTotCnt'];
-                        let temp_html = '';
-                        if (bike_cnt < 5) {
-                            temp_html = `<tr class="urgent">
-                                <td>${rack_name}</td>
-                                <td>${rack_cnt}</td>
-                                <td>${bike_cnt}</td>
-                              </tr>`
-                        } else {
-                            temp_html = `<tr>
-                                <td>${rack_name}</td>
-                                <td>${rack_cnt}</td>
-                                <td>${bike_cnt}</td>
-                              </tr>`
-                        }
-                        $('#names-q1').append(temp_html);
-                    }
-                }
-            })
-        }
-  
-</script>
 
 
 <body>
@@ -58,10 +21,10 @@
 
   <div id="mypage">
     <h1>내 정보</h1>
-      <div class ="account">아이디<input></div>
-      <div class="name">이름<input></div>
-      <div class="phonenumber">전화번호<input></div>
-      <div class="address">주소<input></div>
+      <div class ="account">아이디<input id="accountInput" type="text"></div>
+      <div class="name">이름<input id="nameInput"  type="text"></div>
+      <div class="phonenumber">전화번호<input id="phoneInput" type="text"></div>
+      <div class="address">주소<input id="addressInput" type="text"></div>
 
       <table>
     
@@ -77,5 +40,38 @@
   </div>
 
 </body>
+<script>
+  //정보를 받을 수 있는지 없는지 판단
+  //로그인이 되어있다 가정함.
+  //페이지를 랜더링하면 ejs에서 브라우저가 읽고 보여주는 데 시간이 걸림
+  
+ $(document).ready(function (){
+//dom이라는 객체가 있음. dom이 완성된 다음 아래 코드를 실행하라란 의미.
+//이러면 html 렌더링 되는 과정
+getmypage()
+ }) 
+ //페이지를 렌더하는 친구와 api를 구분하기
+ //id를 이용해서 scirpt에서 직접 값을 넣어주는 것 
+  
+function getmypage() {
+    $.ajax({
+        type: "GET",
+        url: "/api/users",
+        data: {},
+        success: function (response) {
+          console.log(response.user)
+          const user = response.user
+          $("#accountInput").attr('value', user.account)
+          $("#nameInput").attr('value', user.name)
+          $("#phoneInput").attr('value', user.phone)
+          $("#addressInput").attr('value', user.address)
 
+          
+
+        
+        }
+    })
+}
+
+  </script>
 </html>
