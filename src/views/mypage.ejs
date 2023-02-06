@@ -1,25 +1,78 @@
-<!-- <script src="/js/admin-index.js"></script> -->
-<link rel="stylesheet" href="/css/admin.css">
-<title>Document</title>
+
+
+
+<head>
+  <script>
+    src = "https://code.jquery.com/jquery-3.6.3.js";
+    integrity = "sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=";
+    crossorigin = "anonymous";</script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+  <link rel="stylesheet" href="/css/admin.css">
+  <title>마이페이지</title>
 </head>
+<!-- ///에이젝스로 append  -->
+<script>
+
+        function q1() {
+            $('#names-q1').empty();
+            $.ajax({
+                type: "GET",
+                url: "/user",
+                data: {},
+                success: function (response) {
+                    let rows = response["getStationList"]["row"];
+                    for (let i = 0; i < rows.length; i++) {
+                        let rack_name = rows[i]['stationName'];
+                        let rack_cnt = rows[i]['rackTotCnt'];
+                        let bike_cnt = rows[i]['parkingBikeTotCnt'];
+                        let temp_html = '';
+                        if (bike_cnt < 5) {
+                            temp_html = `<tr class="urgent">
+                                <td>${rack_name}</td>
+                                <td>${rack_cnt}</td>
+                                <td>${bike_cnt}</td>
+                              </tr>`
+                        } else {
+                            temp_html = `<tr>
+                                <td>${rack_name}</td>
+                                <td>${rack_cnt}</td>
+                                <td>${bike_cnt}</td>
+                              </tr>`
+                        }
+                        $('#names-q1').append(temp_html);
+                    }
+                }
+            })
+        }
+  
+</script>
+
 
 <body>
-  <h1>ADMIN</h1>
-  <button><a href="/admin_index">admin index</a></button>
-  <button><a href="/admin_register">관리자 추가</a></button>
-  <button><a href="/admin_login">관리자 로그인</a></button>
-  <button><a href="/admin_add_product">상품 추가</a></button>
-  <button id="logoutBtn">로그아웃</button>
+  <h1>마이페이지</h1>
+  <button><a href="/admin_index">주문신청</a></button>
+  <button><a href="/admin_register">주문내역</a></button>
+  <button><a href="/admin_login">로그아웃</a></button>
+  
 
-  <div id="productsBox">
-    <h1>상품 리스트</h1>
-    <div id="itemsHeader">
-      <div class="itemImage">썸네일</div>
-      <div class="itemName">상품 이름</div>
-      <div class="itemPrice">상품 가격</div>
-      <div class="itemQuantity">상품 수량</div>
-      <div class="itemDesc">상품 설명</div>
-      <div class="itemEdit">관리</div>
+  <div id="mypage">
+    <h1>내 정보</h1>
+      <div class ="account">아이디<input></div>
+      <div class="name">이름<input></div>
+      <div class="phonenumber">전화번호<input></div>
+      <div class="address">주소<input></div>
+
+      <table>
+    
+        <th>아이디</th>
+        <th>이름</th>
+        <th>전화번호</th>
+        <th>주소</th>
+        
+      
+      </table>
+      
     </div>
   </div>
 
