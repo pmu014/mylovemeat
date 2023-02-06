@@ -1,18 +1,18 @@
 const path = require('path');
 const fs = require('fs');
 
-const jwt = require('jsonwebtoken');
-
 require('dotenv').config();
 
 const { Admin, Product } = require('../db/models/index');
-
-const HashedPassword = require('../utills/hashed-password');
+const CreateToken = require('../utills/CreateToken');
+const HashedPassword = require('../utills/HashedPassword');
 const AdminRepositories = require('../repositories/admins.repositories');
+const checkErrorMessage = require('../utills/check-errorMessage');
 
 class AdminsServices {
   adminRepositories = new AdminRepositories(Admin, Product);
   hashedPassword = new HashedPassword();
+  createToken = new CreateToken();
 
   registerAdmin = async (inputAccount, inputPassword, inputName) => {
     const encyptionPassword = await this.hashedPassword.createHashedPassword(
@@ -32,41 +32,41 @@ class AdminsServices {
   loginAdmin = async (inputAccount, inputPassword) => {
     const returnValue = await this.adminRepositories.getAdmin(inputAccount);
 
+    if (!returnValue) {
+      return { code: '400', message: '아이디 또는 비밀번호가 틀렸습니다.' };
+    }
+
+    if (checkErrorMessage(returnValue)) {
+      return returnValue;
+    }
+
     const checkPassword = await this.hashedPassword.verifyPassword(
       inputPassword,
-      returnValue.dataValues.password,
-      returnValue.dataValues.salt
+      returnValue.password,
+      returnValue.salt
     );
 
     if (!checkPassword) {
-      return { code: '400', errorMessage: 'Login Fail' };
+      return { code: '400', message: '아이디 또는 비밀번호가 틀렸습니다.' };
     }
 
-    const accessToken = jwt.sign(
-      {
-        type: 'JWT',
-        adminId: returnValue.id,
-        accountId: returnValue.account,
-        rating: returnValue.rating,
-      },
-      process.env.ACCESS_JWT_SECRET_KEY,
-      {
-        expiresIn: '5m',
-      }
-    );
+    const accessTokenPayload = {
+      type: 'JWT',
+      adminId: returnValue.id,
+      accountId: returnValue.account,
+      rating: returnValue.rating,
+    };
 
-    const refreshToken = jwt.sign(
-      {
-        type: 'JWT',
-        adminId: returnValue.id,
-        accountId: returnValue.account,
-        rating: returnValue.rating,
-      },
-      process.env.REFRESH_JWT_SECRET_KEY,
-      {
-        expiresIn: '5h',
-      }
-    );
+    const refreshTokenPayload = {
+      type: 'JWT',
+      adminId: returnValue.id,
+      accountId: returnValue.account,
+      rating: returnValue.rating,
+    };
+
+    const accessToken = this.createToken.createAccessToken(accessTokenPayload);
+    const refreshToken =
+      this.createToken.createRefreshToken(refreshTokenPayload);
 
     return { accessToken, refreshToken };
   };
@@ -124,13 +124,14 @@ class AdminsServices {
       returnValue.img
     );
 
-    if (!returnValue.returnValue) {
-      return { code: 404, errorMessage: '상품을 찾을 수 없습니다' };
+    if (!returnValue) {
+      return { code: 404, message: '상품을 찾을 수 없습니다' };
     }
 
     if (fs.existsSync(imgPath)) {
       fs.unlinkSync(imgPath);
     }
+
     return returnValue;
   };
 }

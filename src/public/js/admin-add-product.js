@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     formData.append('inputDesc', inputDesc);
     formData.append('inputQuantity', inputQuantity);
 
-    console.log(formData);
     axios({
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -31,7 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = '/admin_index';
       })
       .catch((response) => {
-        console.log(response);
+        const { data } = response.response;
+        alert(data.errorMessage);
       });
   });
 });

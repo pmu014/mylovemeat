@@ -4,7 +4,17 @@ const authToken = require('../middlewares/auth-middleware');
 
 const router = express.Router();
 
-router.get('/admin_register', (req, res) => {
+router.get('/admin_register', authToken, (req, res) => {
+  const { rating } = req.tokenInfo;
+
+  if (rating !== 'super') {
+    return res
+      .status(403)
+      .send(
+        "<script>alert('권한이 부족합니다.');location.href='/admin_index';</script>"
+      );
+  }
+
   res.render('admins/admin-register');
 });
 
@@ -22,7 +32,6 @@ router.get('/admin_add_product', authToken, (req, res) => {
 
 router.get('/admin_edit_product', authToken, (req, res) => {
   const { productId } = req.query;
-  console.log(productId);
 
   res.render('admins/admin-edit-product', { productId });
 });

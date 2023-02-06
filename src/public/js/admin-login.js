@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = '/admin_index';
       })
       .catch((response) => {
-        console.log(response);
+        const { data } = response.response;
+        alert(data.errorMessage);
       });
   });
 });

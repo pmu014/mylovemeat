@@ -25,9 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
       .then((response) => {
         const data = response.data;
         alert(data.message);
+        window.location.href = '/admin_register';
       })
       .catch((response) => {
-        console.log('실패');
+        const { data } = response.response;
+        alert(data.errorMessage);
       });
   });
 });

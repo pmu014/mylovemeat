@@ -1,9 +1,13 @@
 const jwt = require('jsonwebtoken');
 
+const CreateToken = require('../utills/CreateToken');
+
 require('dotenv').config();
 
 const authToken = (req, res, next) => {
-  const { accessToken, refreshToken } = req.cookies;
+  const createToken = new CreateToken();
+
+  let { accessToken, refreshToken } = req.cookies;
 
   if (!accessToken || !refreshToken) {
     res.send(
@@ -11,72 +15,41 @@ const authToken = (req, res, next) => {
     );
   }
 
-  console.log(
-    verifyRefreshToken(accessToken),
-    verifyRefreshToken(refreshToken)
-  );
+  let accessTokenInfo = verifyAccessToken(accessToken);
+  let refreshTokenInfo = verifyRefreshToken(refreshToken);
 
-  if (!verifyAccessToken(accessToken)) {
-    if (!verifyRefreshToken(refreshToken)) {
+  if (!accessTokenInfo) {
+    if (!refreshTokenInfo) {
       res.clearCookie('accessToken');
       res.clearCookie('refreshToken');
-
       res.send(
-        "<script>alert('로그인 후 이용 가능합니다.');location.href='/admin_login';</script>"
+        "<script>alert('로그인이 만료 되었습니다.');location.href='/admin_login';</script>"
       );
     }
 
-    const refreshTokenInfo = jwt.verify(
-      refreshToken,
-      process.env.REFRESH_JWT_SECRET_KEY
-    );
-
-    const accessToken = jwt.sign(
-      {
-        type: 'JWT',
-        adminId: refreshTokenInfo.adminId,
-        accountId: refreshTokenInfo.accountId,
-        rating: refreshTokenInfo.rating,
-      },
-      process.env.ACCESS_JWT_SECRET_KET,
-      {
-        expiresIn: '5m',
-      }
-    );
+    accessToken = createToken.createAccessToken(refreshTokenInfo);
 
     res.cookie('accessToken', accessToken);
+    accessToken = verifyAccessToken(accessToken);
   }
-  console.log('체크1');
-  const accessTokenInfo = jwt.verify(
-    accessToken,
-    process.env.ACCESS_JWT_SECRET_KET
-  );
-  if (!verifyRefreshToken(refreshToken)) {
-    const refreshToken = jwt.sign(
-      {
-        type: 'JWT',
-        adminId: accessTokenInfo.adminId,
-        accountId: accessTokenInfo.accountId,
-        rating: accessTokenInfo.rating,
-      },
-      process.env.REFRESH_JWT_SECRET_KEY,
-      {
-        expiresIn: '5h',
-      }
-    );
 
+  if (!refreshTokenInfo) {
+    refreshToken = createToken.createRefreshToken(accessTokenInfo);
     res.cookie('refreshToken', refreshToken);
   }
 
-  console.log('체크2');
-  req.adminInfo = accessTokenInfo;
+  req.tokenInfo = accessTokenInfo;
   next();
 };
 
 const verifyAccessToken = function (accessToken) {
   try {
-    jwt.verify(accessToken, process.env.ACCESS_JWT_SECRET_KET);
-    return true;
+    const { iat, exp, ...accessTokenInfo } = jwt.verify(
+      accessToken,
+      process.env.ACCESS_JWT_SECRET_KEY
+    );
+
+    return accessTokenInfo;
   } catch (error) {
     return false;
   }
@@ -84,8 +57,11 @@ const verifyAccessToken = function (accessToken) {
 
 const verifyRefreshToken = function (refreshToken) {
   try {
-    jwt.verify(refreshToken, process.env.REFRESH_JWT_SECRET_KEY);
-    return true;
+    const { iat, exp, ...refreshTokenInfo } = jwt.verify(
+      refreshToken,
+      process.env.REFRESH_JWT_SECRET_KEY
+    );
+    return refreshTokenInfo;
   } catch (error) {
     return false;
   }

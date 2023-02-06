@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const productsBox = document.getElementById('productsBox');
-  const logoutBtn = document.getElementById('looutBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
 
   logoutBtn.addEventListener('click', () => {
     axios({
@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = 'admin_login';
     });
   });
+
   axios({
     method: 'get',
     url: '/api/products',
@@ -61,19 +62,20 @@ document.addEventListener('DOMContentLoaded', () => {
             })
               .then(() => {
                 alert('상품이 삭제 되었습니다');
-
                 window.location.href = '/admin_index';
               })
               .catch((response) => {
-                console.log(response);
+                const { data } = response.response;
+                alert(data.errorMessage);
+                window.location.href = '/admin_index';
               });
           });
         }
       });
     })
     .catch((response) => {
-      const data = response.data;
-
-      console.log(data);
+      const { data } = response.response;
+      alert(data.errorMessage);
+      window.location.href = '/admin_index';
     });
 });

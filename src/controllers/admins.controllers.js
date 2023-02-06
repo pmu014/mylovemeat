@@ -8,19 +8,33 @@ class AdminsController {
   registerAdmin = async (req, res) => {
     const { inputAccount, inputPassword, inputName } = req.body;
 
+    if (!inputAccount || !inputPassword || !inputName) {
+      return res.status(400).json({ errorMessage: '요청이 잘못되었습니다' });
+    }
+
     const returnValue = await this.adminsServices.registerAdmin(
       inputAccount,
       inputPassword,
       inputName
     );
 
+    if (checkErrorMessage(returnValue)) {
+      return res
+        .status(returnValue.code)
+        .json({ errorMessage: returnValue.message });
+    }
+
     res.status(201).json({
-      message: `${returnValue.name}관리자가 생성되었습니다`,
+      message: `${returnValue.name} 관리자가 생성되었습니다`,
     });
   };
 
   loginAdmin = async (req, res) => {
     const { inputAccount, inputPassword } = req.body;
+
+    if (!inputAccount || !inputPassword) {
+      return res.status(400).json({ errorMessage: '요청이 잘못되었습니다' });
+    }
 
     const returnValue = await this.adminsServices.loginAdmin(
       inputAccount,
@@ -28,9 +42,7 @@ class AdminsController {
     );
 
     if (checkErrorMessage(returnValue)) {
-      res
-        .status(returnValue.code)
-        .json({ errorMessage: returnValue.errorMessage });
+      res.status(returnValue.code).json({ errorMessage: returnValue.message });
       return;
     }
 
@@ -43,7 +55,17 @@ class AdminsController {
   addProduct = async (req, res) => {
     const { inputName, inputPrice, inputDesc, inputImage, inputQuantity } =
       req.body;
-    const { adminId } = { adminId: 1 };
+    const { adminId } = req.tokenInfo;
+
+    if (
+      !inputName ||
+      !inputPrice ||
+      !inputDesc ||
+      !inputImage ||
+      !inputQuantity
+    ) {
+      return res.status(400).json({ errorMessage: '요청이 잘못되었습니다.' });
+    }
 
     const returnValue = await this.adminsServices.addProduct(
       inputName,
@@ -55,16 +77,15 @@ class AdminsController {
     );
 
     if (checkErrorMessage(returnValue)) {
-      res
+      return res
         .status(returnValue.code)
-        .json({ errorMessage: returnValue.errorMessage });
+        .json({ errorMessage: returnValue.message });
     }
 
     res.status(201).json({ message: '상품이 추가되었습니다' });
   };
 
   editProduct = async (req, res) => {
-    console.log('클릭!');
     const {
       inputName,
       inputPrice,
@@ -74,16 +95,7 @@ class AdminsController {
       productId,
     } = req.body;
 
-    console.log(
-      inputName,
-      inputPrice,
-      inputDesc,
-      inputImage,
-      inputQuantity,
-      productId
-    );
-
-    const { adminId } = { adminId: 1 };
+    const { adminId } = req.tokenInfo;
 
     const returnValue = await this.adminsServices.editProduct(
       inputName,
@@ -96,12 +108,12 @@ class AdminsController {
     );
 
     if (checkErrorMessage(returnValue)) {
-      res
+      return res
         .status(returnValue.code)
-        .json({ errorMessage: returnValue.errorMessage });
+        .json({ errorMessage: returnValue.message });
     }
 
-    res.status(201).json({ message: '상품이 수정 되었습니다.' });
+    res.status(201).json({ message: '상품이 수정 되었습니다' });
   };
 
   delProduct = async (req, res) => {
@@ -110,9 +122,9 @@ class AdminsController {
     const returnValue = await this.adminsServices.delProduct(productId);
 
     if (checkErrorMessage(returnValue)) {
-      res
+      return res
         .status(returnValue.code)
-        .json({ errorMessage: returnValue.errorMessage });
+        .json({ errorMessage: returnValue.message });
     }
 
     res.status(204).end();

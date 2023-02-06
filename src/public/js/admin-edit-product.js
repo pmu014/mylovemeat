@@ -32,10 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('inputPrice', inputPrice);
 
         if (inputImage.files[0]) {
-          console.log(inputImage.files[0]);
           formData.append('inputImage', inputImage.files[0]);
         } else {
-          console.log(data.returnValue.img);
           formData.append('inputImage', data.returnValue.img);
         }
 
@@ -43,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('inputQuantity', inputQuantity);
         formData.append('productId', productId);
 
-        console.log(formData);
         axios({
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -58,11 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '/admin_index';
           })
           .catch((response) => {
-            console.log(response);
+            const { data } = response.response;
+            alert(data.errorMessage);
           });
       });
     })
     .catch((response) => {
-      console.log(response);
+      const { data } = response.response;
+      alert(data.errorMessage);
+      window.location.href = '/admin_index';
     });
 });
