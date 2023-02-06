@@ -4,7 +4,7 @@ $(document).ready(function(){
 function show_products(){
     $.ajax({
         type: 'GET',
-        url: '/api/products_main',
+        url: '/api/products',
         data: {},
         success: function (response) {
             console.log(response);
@@ -13,9 +13,11 @@ function show_products(){
             let temp_html = ''
             for (let i =0; i < rows.length; i++){
             let price = rows[i]['price']
+            let img = rows[i]['img']
+            let id = rows[i]['id']
             
             temp_html += `<div class="products-img" type="submit">
-            <button><a href="/products_detail"><img src="/images/meat.jpg" width="300" height= "400"alt=""></a></button>
+            <button><a href="/products/products-detail?id=${id}"><img src="/images/${img}" width="300" height= "400"alt=""></a></button>
             <div>
             <label class="form-label" >이름${price}</label>
             </div>
@@ -28,10 +30,4 @@ function show_products(){
     });
 }
 
-function customAlert(text, confirmCallback) {
-$("#alertText").text(text);
-$("#alertModal").modal("show");
-if (confirmCallback) {
-    $("#alertModal .btn-confirm").click(confirmCallback);
-}
-}
+

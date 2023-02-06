@@ -2,11 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/products_main', (req, res) => {
+router.get('/products', (req, res) => {
   res.render('products/products-main');
 });
 
-router.get('/products_detail', (req, res) => {
+router.get('/products/products-detail', (req, res) => {
   res.render('products/products-detail');
 });
 

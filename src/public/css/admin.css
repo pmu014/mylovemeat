@@ -3,26 +3,20 @@
 * {
   font-family: 'Do Hyeon', sans-serif;
 }
-
+h1{
+  margin-top: 40px;
+}
 hr{
   border:solid 1px;
 }
-.products-box{
-  border: 2px solid lavender;
+.products-main{
+  /* border: 2px solid lavender; */
   width: 1470px;
   margin: auto;
+  margin-top: 100px;
   display: flex;
   flex-wrap: wrap;
 
-}
-.products_detail{
-  border: 2px solid lavender;
-  width: 1500px;
-  margin: 0 auto;
-  display: flex;
-}
-.my-btn{
-  width:100px
 }
 .main-css{
   max-width:1450px;
@@ -31,6 +25,12 @@ hr{
   justify-content: space-between;
  
 }
+
+.products-img{
+  margin: 0px 50px 50px 0px;
+  text-align: center;
+  font-size: large;
+}
 .btn-css{
   width: 350px;
   height: 100px;
@@ -38,14 +38,47 @@ hr{
 .btn-css2{
   margin-top: 10px;
 }
-.products-img{
-  margin: 0px 50px 50px 0px;
+.my-btn{
+  width:100px
+}
+
+.products-detail-div{
+  /* border: 2px solid lavender; */
+  width: 900px;
+  margin: 0 auto;
+  margin-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.products-detail{
+  /* border: 2px solid lavender; */
+  width:400px;
+  margin-top: 220px;
+}
+.products-detail-form{
+  width:320px;
+  height: 50px;
   text-align: center;
-  font-size: large;
+  margin-bottom: 20px;
 }
-.form-label{
-  font-size: large;
+.products-detail-form-description{
+  width:770px;
+  height: 200px;
+  text-align: center;
 }
+.products-detail-btn-div{
+  /* border: 2px solid lavender;  */
+  width: 800px;
+  margin-left: 510px;
+  display: flex;
+}
+.products-detail-btn{
+  width: 380px;
+  height: 50px;
+  margin-right: 10px;
+  margin-top: 30px;
+}
+
 #registerBox > h1 {
   margin: 0 auto;
   margin-bottom: 25px;

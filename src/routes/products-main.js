@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {Product} = require('../db/models');
 
-router.get("/products_main", async(req,res)=>{
+router.get("/products", async(req,res)=>{
     
     try{
         const products = await Product.findAll({where : Product.id});
@@ -13,7 +13,7 @@ router.get("/products_main", async(req,res)=>{
     }
 })
 
-router.post("/products_main",async(req,res)=>{
+router.post("/products",async(req,res)=>{
     try{
         const {price,name,description,img,quantity} = req.body;
         
