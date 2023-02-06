@@ -5,7 +5,7 @@ const checkErrorMessage = require('../utills/check-errorMessage');
 class UsersController {
     usersService = new UsersService();
 
-    createUser = async (req, res, next) => {
+    createUser = async (req, res) => {
             try {
             const { account, password, name, address, phone } = req.body;
             
@@ -32,7 +32,7 @@ class UsersController {
             }    
         }
 
-    loginUser = async (req, res, next) => {
+    loginUser = async (req, res) => {
 
         const { account, password } = req.body;
 
@@ -46,11 +46,18 @@ class UsersController {
             .json({ errorMessage: returnValue.errorMessage });
         }
 
-        res.cookie(returnValue.accessToken);
-        res.cookie(returnValue.refreshToken);
+        res.cookie("accessToken", returnValue.accessToken);
+        res.cookie("refreshToken", returnValue.refreshToken);
         console.log(returnValue.accessToken);
         console.log(returnValue.refreshToken);
         res.status(200).json({ message: '로그인 되었습니다' });
+        };
+    
+    logoutUser = (req, res, next) => {
+        res.clearCookie('accessToken');
+        res.clearCookie('refreshToken');
+    
+        res.status(200).redirect('/user_login');
         };
 }
 

@@ -26,11 +26,11 @@ module.exports = {
           allowNull: false,
           type: Sequelize.TEXT,
         },
-        quantity: {
+        adminId: {
           allowNull: false,
           type: Sequelize.INTEGER,
         },
-        adminId: {
+        quantity: {
           allowNull: false,
           type: Sequelize.INTEGER,
         },
@@ -40,6 +40,9 @@ module.exports = {
         },
         updatedAt: {
           allowNull: false,
+          type: Sequelize.DATE,
+        },
+        deletedAt: {
           type: Sequelize.DATE,
         },
       })

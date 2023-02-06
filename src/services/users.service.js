@@ -2,12 +2,13 @@ const jwt = require('jsonwebtoken');
 
 const UsersRepository = require('../repositories/users.repository');
 const HashedPassword = require('../utills/hashed-password');
-
+const CreateToken = require('../utills/CreateToken');
 
 class UsersService {
     usersRepository = new UsersRepository();
     hashedPassword = new HashedPassword();
-
+    createToken = new CreateToken();
+    
     createUser = async (account, password, name, address, phone) => {
         try {
             
@@ -70,31 +71,26 @@ class UsersService {
                 return { code: '400', errorMessage: '아이디 또는 비밀번호 오류입니다' };
             }
             
-            const accessToken = jwt.sign(
+            const accessTokenPayload = 
                 {
                 type: 'JWT',
                 userId: returnValue.dataValues.id,
                 accountId: returnValue.dataValues.account,
-                },
-                process.env.ACCESS_JWT_SECRET_KEY,
-                {
-                expiresIn: '5m',
-                }
-            );
+                };
 
-            const refreshToken = jwt.sign(
+            const refreshTokenPayload = 
                 {
                 type: 'JWT',
                 userId: returnValue.dataValues.id,
                 accountId: returnValue.dataValues.account,
-                },
-                process.env.REFRESH_JWT_SECRET_KEY,
-                {
-                expiresIn: '5h',
-                }
-            );
+                };
 
+            const accessToken = this.createToken.createAccessToken(accessTokenPayload);
+            const refreshToken =
+                this.createToken.createRefreshToken(refreshTokenPayload);
+        
             return { accessToken, refreshToken };
+
     
         }
 }

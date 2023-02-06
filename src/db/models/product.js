@@ -37,11 +37,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.TEXT,
       },
-      quantity: {
+      adminId: {
         allowNull: false,
         type: DataTypes.INTEGER,
       },
-      adminId: {
+      quantity: {
         allowNull: false,
         type: DataTypes.INTEGER,
       },
@@ -53,11 +53,15 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.DATE,
       },
+      deletedAt: {
+        type: DataTypes.DATE,
+      },
     },
     {
       sequelize,
       tableName: 'products',
       modelName: 'Product',
+      paranoid: true,
     }
   );
   return Product;

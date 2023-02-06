@@ -16,7 +16,7 @@ class UsersRepository {
             address,
             phone,
             salt });
-        console.log(returnValue);
+
         return returnValue;
     }
     findUser = async(account) => {
