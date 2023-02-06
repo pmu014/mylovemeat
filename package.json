@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:unit": "jest __test__/unit/admins.services.unit.spec.js --forceExit",
+    "test:unit": "jest __test__/unit/admins.repositories.unit.spec.js --forceExit",
     "test:unit:silent": "jest __test__/unit/* --silent --forceExit",
     "test:unit:coverage": "jest __test__/unit/* --coverage --forceExit",
     "start": "nodemon app"

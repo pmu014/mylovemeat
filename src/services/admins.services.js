@@ -116,6 +116,7 @@ class AdminsServices {
   delProduct = async (productId) => {
     const returnValue = await this.adminRepositories.delProduct(productId);
 
+    console.log(__dirname, returnValue.img);
     const imgPath = path.join(
       __dirname,
       '../',

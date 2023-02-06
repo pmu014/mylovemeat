@@ -1,10 +1,10 @@
 const express = require('express');
 
-const authToken = require('../middlewares/auth-middleware');
+const adminAuthToken = require('../middlewares/admin-auth-middleware');
 
 const router = express.Router();
 
-router.get('/admin_register', authToken, (req, res) => {
+router.get('/admin_register', adminAuthToken, (req, res) => {
   const { rating } = req.tokenInfo;
 
   if (rating !== 'super') {

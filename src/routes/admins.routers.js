@@ -1,6 +1,6 @@
 const express = require('express');
 
-const authToken = require('../middlewares/auth-middleware');
+const adminAuthToken = require('../middlewares/admin-auth-middleware');
 const AdminsController = require('../controllers/admins.controllers');
 const upload = require('../utills/multer');
 
@@ -14,14 +14,14 @@ router.delete('/products/:productId', authToken, adminsController.delProduct);
 router.post(
   '/products',
   upload.single('inputImage'),
-  authToken,
+  adminAuthToken,
   adminsController.addProduct
 );
 
 router.put(
   '/products',
   upload.single('inputImage'),
-  authToken,
+  adminAuthToken,
   adminsController.editProduct
 );
 

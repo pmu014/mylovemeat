@@ -4,7 +4,7 @@ const CreateToken = require('../utills/CreateToken');
 
 require('dotenv').config();
 
-const authToken = (req, res, next) => {
+const adminAuthToken = (req, res, next) => {
   const createToken = new CreateToken();
 
   let { accessToken, refreshToken } = req.cookies;
@@ -67,4 +67,4 @@ const verifyRefreshToken = function (refreshToken) {
   }
 };
 
-module.exports = authToken;
+module.exports = adminAuthToken;

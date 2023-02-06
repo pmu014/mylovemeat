@@ -179,11 +179,11 @@ describe('admins.controller Unit Test', () => {
 
   test('addProduct의 adminsServices.addProduct 성공', async () => {
     const returnValue = {
-      inputName: '돼지고기',
-      inputPrice: '19900',
-      inputDesc: '국내산 돼지고기',
-      inputImage: '2023-02-06-17-56-11-돼지고기.jpg',
-      inputQuantity: 10,
+      name: '돼지고기',
+      price: '19900',
+      description: '국내산 돼지고기',
+      img: '2023-02-06-17-56-11-돼지고기.jpg',
+      quantity: 10,
       adminId: 1,
     };
     const requestTokenInfo = { adminId: 1 };
@@ -287,11 +287,11 @@ describe('admins.controller Unit Test', () => {
 
   test('editProduct의 adminsServices.editProduct 성공', async () => {
     const returnValue = {
-      inputName: '돼지고기',
-      inputPrice: '19900',
-      inputDesc: '국내산 돼지고기',
-      inputImage: '2023-02-06-17-56-11-돼지고기.jpg',
-      inputQuantity: 10,
+      name: '돼지고기',
+      price: '19900',
+      description: '국내산 돼지고기',
+      img: '2023-02-06-17-56-11-돼지고기.jpg',
+      quantity: 10,
     };
     const requestTokenInfo = { adminId: 1 };
     const requestBody = {

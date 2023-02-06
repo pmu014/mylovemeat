@@ -1,7 +1,5 @@
 const AdminsServices = require('../../src/services/admins.services');
 
-const CreateToken = require('../../src/utills/CreateToken');
-
 const mockAdminsRepositories = {
   registerAdmin: jest.fn(),
   loginAdmin: jest.fn(),
@@ -108,11 +106,11 @@ describe('admins.service Unit Test', () => {
       1,
     ];
     const returnValue = {
-      inputName: '돼지고기',
-      inputPrice: '19900',
-      inputDesc: '국내산 돼지고기',
-      inputImage: '2023-02-06-17-56-11-돼지고기.jpg',
-      inputQuantity: 10,
+      name: '돼지고기',
+      price: '19900',
+      description: '국내산 돼지고기',
+      img: '2023-02-06-17-56-11-돼지고기.jpg',
+      quantity: 10,
       adminId: 1,
     };
 
@@ -133,11 +131,11 @@ describe('admins.service Unit Test', () => {
       1,
     ];
     const returnValue = {
-      inputName: '돼지고기',
-      inputPrice: '19900',
-      inputDesc: '국내산 돼지고기',
-      inputImage: '2023-02-06-17-56-11-돼지고기.jpg',
-      inputQuantity: 10,
+      name: '돼지고기',
+      price: '19900',
+      description: '국내산 돼지고기',
+      img: '2023-02-06-17-56-11-돼지고기.jpg',
+      quantity: 10,
       adminId: 1,
     };
 
@@ -148,26 +146,18 @@ describe('admins.service Unit Test', () => {
   });
 
   test('delProduct의 성공', async () => {
-    const mockParam = [
-      '돼지고기',
-      '19900',
-      '국내산 돼지고기',
-      '2023-02-06-17-56-11-돼지고기.jpg',
-      10,
-      1,
-      1,
-    ];
+    const mockParam = 1;
     const returnValue = {
-      inputName: '돼지고기',
-      inputPrice: '19900',
-      inputDesc: '국내산 돼지고기',
-      inputImage: '2023-02-06-17-56-11-돼지고기.jpg',
-      inputQuantity: 10,
+      name: '돼지고기',
+      price: '19900',
+      description: '국내산 돼지고기',
+      img: '2023-02-06-17-56-11-돼지고기.jpg',
+      quantity: 10,
       adminId: 1,
     };
 
     mockAdminsRepositories.delProduct = jest.fn(() => returnValue);
-    await adminsServices.delProduct(...mockParam);
+    await adminsServices.delProduct(mockParam);
 
     expect(mockAdminsRepositories.delProduct).toHaveBeenCalledTimes(1);
   });
