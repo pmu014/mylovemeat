@@ -42,6 +42,9 @@ module.exports = {
           allowNull: false,
           type: Sequelize.DATE,
         },
+        deletedAt: {
+          type: Sequelize.DATE,
+        },
       })
       .then(async () => {
         await queryInterface.addConstraint('products', {

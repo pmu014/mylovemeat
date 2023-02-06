@@ -30,7 +30,7 @@ const adminAuthToken = (req, res, next) => {
     accessToken = createToken.createAccessToken(refreshTokenInfo);
 
     res.cookie('accessToken', accessToken);
-    accessToken = verifyAccessToken(accessToken);
+    accessTokenInfo = verifyAccessToken(accessToken);
   }
 
   if (!refreshTokenInfo) {
@@ -38,6 +38,7 @@ const adminAuthToken = (req, res, next) => {
     res.cookie('refreshToken', refreshToken);
   }
 
+  console.log(accessToken);
   req.tokenInfo = accessTokenInfo;
   next();
 };

@@ -116,22 +116,21 @@ class AdminsServices {
   delProduct = async (productId) => {
     const returnValue = await this.adminRepositories.delProduct(productId);
 
-    console.log(__dirname, returnValue.img);
-    const imgPath = path.join(
-      __dirname,
-      '../',
-      'public',
-      'images',
-      returnValue.img
-    );
+    // const imgPath = path.join(
+    //   __dirname,
+    //   '../',
+    //   'public',
+    //   'images',
+    //   returnValue.img
+    // );
 
     if (!returnValue) {
       return { code: 404, message: '상품을 찾을 수 없습니다' };
     }
 
-    if (fs.existsSync(imgPath)) {
-      fs.unlinkSync(imgPath);
-    }
+    // if (fs.existsSync(imgPath)) {
+    //   fs.unlinkSync(imgPath);
+    // }
 
     return returnValue;
   };

@@ -9,7 +9,11 @@ const adminsController = new AdminsController();
 
 router.post('/logout', adminsController.logoutAdmin);
 
-router.delete('/products/:productId', authToken, adminsController.delProduct);
+router.delete(
+  '/products/:productId',
+  adminAuthToken,
+  adminsController.delProduct
+);
 
 router.post(
   '/products',
@@ -27,6 +31,6 @@ router.put(
 
 router.post('/login', adminsController.loginAdmin);
 
-router.post('/', authToken, adminsController.registerAdmin);
+router.post('/', adminAuthToken, adminsController.registerAdmin);
 
 module.exports = router;

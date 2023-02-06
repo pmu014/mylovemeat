@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then((response) => {
         const data = response.data;
         alert(data.message);
-        window.location.href = '/admin_register';
+        window.location.href = '/admin_index';
       })
       .catch((response) => {
         const { data } = response.response;
