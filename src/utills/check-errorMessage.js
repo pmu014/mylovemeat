@@ -1,5 +1,5 @@
 const checkErrorMessage = (error) => {
-  if (typeof error.errorMessage !== 'undefined') return true;
+  if (typeof error.message !== 'undefined') return true;
   return false;
 };
 

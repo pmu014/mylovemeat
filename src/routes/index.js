@@ -1,15 +1,17 @@
 const express = require('express');
-const router = express.Router();
-// const authMiddleware = require('../middlewares/auth-middleware');
+
+const adminsRouter = require('../routes/admins.routers');
+const productsRouter = require('../routes/products.routers');
 const usersRouter = require('./users.route');
 const cartsRouter = require('./carts.route');
 const ordersRouter = require('./orders.route');
 
+const router = express.Router();
+
+router.use('/admins', adminsRouter);
+router.use('/products', productsRouter);
 router.use('/users', usersRouter);
 router.use('/carts', cartsRouter);
 router.use('/orders', ordersRouter);
-// router.use('/signup', (req, res)=>  {
-//     res.send("sdf")
-// });
 
 module.exports = router;

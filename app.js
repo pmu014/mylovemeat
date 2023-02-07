@@ -23,6 +23,16 @@ app.use('/', pageRouter);
 app.use(express.static(path.join(__dirname, 'src', 'public')));
 
 
+models.sequelize
+  .sync()
+  .then(() => {
+    console.log('DB 연결 성공');
+  })
+  .catch((err) => {
+    console.log('연결 실패: ', err);
+  });
+
 app.listen(env.PORT, () => {
   console.log(env.PORT, '번 포트로 준비되었습니다');
 });
+
