@@ -4,34 +4,54 @@
   font-family: 'Do Hyeon', sans-serif;
 }
 
+#signupBox > h1 {
   margin: 0 auto;
   margin-bottom: 25px;
 }
 
-#addProductBox {
+#signupBox {
   width: 500px;
   margin: 0 auto;
-  margin-top: 60px;
+  margin-top: 100px;
   padding: 20px;
 
-  border: 2px solid #ddd;
+  border: 2px solid lavender;
   border-radius: 20px;
 
-  box-shadow: 1px 1px 5px #ddd;
+  box-shadow: 3px 3px 5px lavender;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
+#signupBtn {
+  width: 200px;
+  margin: 0 auto;
+}
 
+#loginBox > h1 {
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+
+#loginBox {
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+
+  border: 2px solid lavender;
+  border-radius: 20px;
+
+  box-shadow: 3px 3px 5px lavender;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-
+#loginBtn {
   width: 200px;
   margin: 0 auto;
 }

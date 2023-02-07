@@ -26,7 +26,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      salt:{
+      salt: {
         allowNull: false,
         type: Sequelize.STRING,
       },
