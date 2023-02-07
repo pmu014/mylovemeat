@@ -13,7 +13,8 @@ router.get('/products/products-detail', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('products/index');
+  res.render('products/index');
+});
 
 router.get('/user_signup', (req, res) => {
   res.render('user-signup');
@@ -61,6 +62,10 @@ router.get('/admin_edit_product', adminAuthToken, (req, res) => {
   const { productId } = req.query;
 
   res.render('admins/admin-edit-product', { productId });
+});
+
+router.get('/mypage', (req, res) => {
+  res.render('mypage');
 });
 
 module.exports = router;
