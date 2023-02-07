@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+* {
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+
+#cartBox > h1 {
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+
+#cartBox {
+  width: 900px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+
+  border: 2px solid lavender;
+  border-radius: 20px;
+
+  box-shadow: 3px 3px 5px lavender;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.container1 {
+  display: flex;
+  height: 100px;
+}
+.container2 {
+  display: flex;
+}
+
+.img {
+  width: 200px;;
+}
+.name {
+  width: 400px;
+}
+.price {
+  width: 150px;
+}
+.quantity {
+  width: 150px;
+}
+.productPrice {
+  width: 150px;
+}
+
+#buyBtn {
+  width: 120px;
+  margin: 0 auto;
+}

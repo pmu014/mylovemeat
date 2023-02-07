@@ -1,7 +1,7 @@
-require('dotenv').config({ path: '../../.env' });
+// require('dotenv').config({ path: '../../.env' });
+require('dotenv').config();
 
 const env = process.env;
-console.log(env.MYSQL_DATABASE);
 const development = {
   username: env.MYSQL_USERNAME,
   password: env.MYSQL_PASSWORD,
@@ -17,7 +17,7 @@ const production = {
   database: env.MYSQL_DATABASE,
   host: env.MYSQL_HOST,
   dialect: 'mysql',
-  //port: env.MYSQL_PORT
+  port: env.MYSQL_PORT
 };
 
 const test = {
@@ -26,7 +26,7 @@ const test = {
   database: env.MYSQL_TEST_DATABASE,
   host: env.MYSQL_HOST,
   dialect: 'mysql',
-  //port: env.MYSQL_PORT
+  port: env.MYSQL_PORT
 };
 
 module.exports = { development, production, test };
