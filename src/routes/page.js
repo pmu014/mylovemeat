@@ -1,9 +1,19 @@
 const express = require('express');
 
-
 const adminAuthToken = require('../middlewares/admin-auth-middleware');
 
 const router = express.Router();
+
+router.get('/products', (req, res) => {
+  res.render('products/products-main');
+});
+
+router.get('/products/products-detail', (req, res) => {
+  res.render('products/products-detail');
+});
+
+router.get('/', (req, res) => {
+    res.render('products/index');
 
 router.get('/user_signup', (req, res) => {
   res.render('user-signup');

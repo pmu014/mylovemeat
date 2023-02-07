@@ -10,6 +10,7 @@ const models = require('./src/db/models/index');
 const pageRouter = require('./src/routes/page');
 
 const env = process.env;
+
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -21,7 +22,6 @@ app.use(cookie_parser());
 app.use('/api', router);
 app.use('/', pageRouter);
 app.use(express.static(path.join(__dirname, 'src', 'public')));
-
 
 models.sequelize
   .sync()
@@ -35,4 +35,3 @@ models.sequelize
 app.listen(env.PORT, () => {
   console.log(env.PORT, '번 포트로 준비되었습니다');
 });
-
