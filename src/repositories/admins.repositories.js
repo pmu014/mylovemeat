@@ -75,16 +75,11 @@ class AdminRepositories {
 
   delProduct = async (productId) => {
     try {
-      // const { img } = await this.Product.findOne({
-      //   where: { id: productId },
-      //   attributes: ['img'],
-      // });
       const returnValue = await this.Product.destroy({
         where: { id: productId },
       });
 
       return returnValue;
-      // return { returnValue, img };
     } catch (err) {
       console.log('AdminsRepositories delProduct :', err);
       return { code: 500, message: '서버가 준비되지 않았습니다.' };
