@@ -31,6 +31,10 @@ router.put(
 
 router.post('/login', adminsController.loginAdmin);
 
+router.get('/orders', adminsController.getOrders);
+
+router.put('/orders', adminAuthToken, adminsController.changeStatus);
+
 router.post('/', adminAuthToken, adminsController.registerAdmin);
 
 module.exports = router;

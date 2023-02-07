@@ -64,6 +64,10 @@ router.get('/admin_edit_product', adminAuthToken, (req, res) => {
   res.render('admins/admin-edit-product', { productId });
 });
 
+router.get('/admin_order', adminAuthToken, (req, res) => {
+  res.render('admins/admin-order');
+});
+
 router.get('/mypage', (req, res) => {
   res.render('mypage');
 });

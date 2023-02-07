@@ -1,5 +1,5 @@
 <%- include('../includes/head.ejs') %>
-  <script src="/js/admin-index.js"></script>
+  <script src="/js/admin-order.js"></script>
   <link rel="stylesheet" href="/css/admin.css">
   <title>Document</title>
   </head>
@@ -13,15 +13,15 @@
     <button><a href="/admin_order">주문 리스트</a></button>
     <button id="logoutBtn">로그아웃</button>
 
-    <div id="productsBox">
-      <h1>상품 리스트</h1>
+    <div id="orderBox">
+      <h1>주문 리스트</h1>
       <div id="itemsHeader">
         <div class="itemImage">썸네일</div>
         <div class="itemName">상품 이름</div>
         <div class="itemPrice">상품 가격</div>
         <div class="itemQuantity">상품 수량</div>
-        <div class="itemDesc">상품 설명</div>
-        <div class="itemEdit">관리</div>
+        <div class="orderUser">주문자</div>
+        <div class="orderStatus">주문 상태</div>
       </div>
     </div>
 
