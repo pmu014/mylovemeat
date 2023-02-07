@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   })
     .then((response) => {
       const data = response.data;
+      console.log(data);
       const createHTML = new Promise((resolve, reject) => {
         for (const item of data.returnValue) {
           let tempHtml = ``;

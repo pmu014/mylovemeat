@@ -88,7 +88,9 @@ class AdminRepositories {
 
   getOrders = async () => {
     try {
-      const returnValue = await this.Order.findAll({ include: 'Product' });
+      const returnValue = await this.Order.findAll({
+        include: { model: this.Product, paranoid: false },
+      });
 
       return returnValue;
     } catch (err) {
