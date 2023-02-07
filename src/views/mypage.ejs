@@ -1,0 +1,77 @@
+
+<head>
+  <script>
+    src = "https://code.jquery.com/jquery-3.6.3.js";
+    integrity = "sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=";
+    crossorigin = "anonymous";</script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+
+  <title>마이페이지</title>
+</head>
+<!-- ///에이젝스로 append  -->
+
+
+<body>
+  <h1>마이페이지</h1>
+  <button><a href="/admin_index">주문신청</a></button>
+  <button><a href="/admin_register">주문내역</a></button>
+  <button><a href="/admin_login">로그아웃</a></button>
+  
+
+  <div id="mypage">
+    <h1>내 정보</h1>
+      <div class ="account">아이디<input id="accountInput" type="text"></div>
+      <div class="name">이름<input id="nameInput"  type="text"></div>
+      <div class="phonenumber">전화번호<input id="phoneInput" type="text"></div>
+      <div class="address">주소<input id="addressInput" type="text"></div>
+
+      <table>
+    
+        <th>아이디</th>
+        <th>이름</th>
+        <th>전화번호</th>
+        <th>주소</th>
+        
+      
+      </table>
+      
+    </div>
+  </div>
+
+</body>
+<script>
+  //정보를 받을 수 있는지 없는지 판단
+  //로그인이 되어있다 가정함.
+  //페이지를 랜더링하면 ejs에서 브라우저가 읽고 보여주는 데 시간이 걸림
+  
+ $(document).ready(function (){
+//dom이라는 객체가 있음. dom이 완성된 다음 아래 코드를 실행하라란 의미.
+//이러면 html 렌더링 되는 과정
+getmypage()
+ }) 
+ //페이지를 렌더하는 친구와 api를 구분하기
+ //id를 이용해서 scirpt에서 직접 값을 넣어주는 것 
+  
+function getmypage() {
+    $.ajax({
+        type: "GET",
+        url: "/api/users",
+        data: {},
+        success: function (response) {
+          console.log(response.user)
+          const user = response.user
+          $("#accountInput").attr('value', user.account)
+          $("#nameInput").attr('value', user.name)
+          $("#phoneInput").attr('value', user.phone)
+          $("#addressInput").attr('value', user.address)
+
+          
+
+        
+        }
+    })
+}
+
+  </script>
+</html>
