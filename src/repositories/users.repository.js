@@ -25,6 +25,12 @@ class UsersRepository {
         });
         return users;
     }
+    findPhone = async(phone) => {
+        const users = await User.findAll({
+            where: { phone }
+        });
+        return users;
+    }
     findOne = async(account) => {
         const users = await User.findOne({
             where: { account }

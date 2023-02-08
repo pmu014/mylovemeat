@@ -18,7 +18,7 @@ class OrdersController {
       if (checkErrorMessage(returnValue)) {
           return res
           .status(returnValue.code)
-          .json({ errorMessage: returnValue.errorMessage });
+          .json({ errorMessage: returnValue.message });
           
       }
       res.status(201).json({
@@ -43,7 +43,7 @@ class OrdersController {
       if (checkErrorMessage(returnValue)) {
           return res
           .status(returnValue.code)
-          .json({ errorMessage: returnValue.errorMessage });
+          .json({ errorMessage: returnValue.message });
           
       }
       res.status(201).json({

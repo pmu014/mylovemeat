@@ -14,7 +14,7 @@ class UsersController {
                 .status(400)
                 .json({ errorMessage: '요청이 잘못 되었습니다.' });
             }
-            
+
             const returnValue = await this.usersService.createUser(
                 account,
                 password,
@@ -49,7 +49,7 @@ class UsersController {
         if (checkErrorMessage(returnValue)) {
             return res
             .status(returnValue.code)
-            .json({ errorMessage: returnValue.errorMessage });
+            .json({ errorMessage: returnValue.Message });
         }
 
         res.cookie("accessToken", returnValue.accessToken);

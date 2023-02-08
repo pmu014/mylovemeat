@@ -16,8 +16,9 @@ class UsersService {
             const re_password = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{4,10}$/; //  4 ~ 10자 영문, 숫자 조합
     
             const user = await this.usersRepository.findUser(account);
-    
-            if (user) {
+            const dbPhone = await this.usersRepository.findPhone(phone);
+            
+            if (user.length) {
                 return {
                     code: 409,
                     message: '이미 존재하는 아이디 입니다.',
@@ -33,6 +34,12 @@ class UsersService {
                 return {
                     code: 400,
                     message: '핸드폰 번호를 숫자, -을 포함한 휴대전화 형식에 맞게 입력해주세요.',
+
+            }}
+            if (dbPhone.length) {
+                return {
+                    code: 409,
+                    message: '이미 있는 핸드폰 번호입니다.',
             }}
 
             const encryptionPassword = await this.hashedPassword.createHashedPassword(
@@ -51,7 +58,7 @@ class UsersService {
             console.log("createUser-err", err);
             return {
                 code: 400,
-                errorMessage: '요청한 데이터 형식이 올바르지 않습니다.',
+                message: '요청한 데이터 형식이 올바르지 않습니다.',
         }}
         }
     
@@ -60,7 +67,7 @@ class UsersService {
             if (!returnValue) {
                 return{
                 code: 400,
-                errorMessage: '아이디 또는 비밀번호 오류입니다',
+                message: '아이디 또는 비밀번호 오류입니다',
                 }
             }
             
@@ -71,7 +78,7 @@ class UsersService {
             )
 
             if (!checkPassword) {
-                return { code: '400', errorMessage: '아이디 또는 비밀번호 오류입니다' };
+                return { code: '400', message: '아이디 또는 비밀번호 오류입니다' };
             }
             
             const accessTokenPayload = 
