@@ -8,6 +8,12 @@ class UsersController {
     createUser = async (req, res) => {
             try {
             const { account, password, name, address, phone } = req.body;
+
+            if (!account || !password || !name || !address || !phone) {
+                return res
+                .status(400)
+                .json({ errorMessage: '요청이 잘못 되었습니다.' });
+            }
             
             const returnValue = await this.usersService.createUser(
                 account,
@@ -20,7 +26,7 @@ class UsersController {
             if (checkErrorMessage(returnValue)) {
                 return res
                 .status(returnValue.code)
-                .json({ errorMessage: returnValue.errorMessage });
+                .json({ errorMessage: returnValue.message });
                 
             }
             res.status(201).json({

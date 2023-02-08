@@ -3,18 +3,24 @@ const fs = require('fs');
 
 require('dotenv').config();
 
-const { Admin, Product } = require('../db/models/index');
+const { Admin, Product, Order } = require('../db/models/index');
 const CreateToken = require('../utills/CreateToken');
 const HashedPassword = require('../utills/HashedPassword');
 const AdminRepositories = require('../repositories/admins.repositories');
 const checkErrorMessage = require('../utills/check-errorMessage');
 
 class AdminsServices {
-  adminRepositories = new AdminRepositories(Admin, Product);
+  adminRepositories = new AdminRepositories(Admin, Product, Order);
   hashedPassword = new HashedPassword();
   createToken = new CreateToken();
 
   registerAdmin = async (inputAccount, inputPassword, inputName) => {
+    const admin = await this.adminRepositories.getAdmin(inputAccount);
+
+    if (admin.length) {
+      return { code: 409, message: '아이디가 이미 존재합니다' };
+    }
+
     const encyptionPassword = await this.hashedPassword.createHashedPassword(
       inputPassword
     );
@@ -116,21 +122,40 @@ class AdminsServices {
   delProduct = async (productId) => {
     const returnValue = await this.adminRepositories.delProduct(productId);
 
-    // const imgPath = path.join(
-    //   __dirname,
-    //   '../',
-    //   'public',
-    //   'images',
-    //   returnValue.img
-    // );
-
     if (!returnValue) {
       return { code: 404, message: '상품을 찾을 수 없습니다' };
     }
 
-    // if (fs.existsSync(imgPath)) {
-    //   fs.unlinkSync(imgPath);
-    // }
+    return returnValue;
+  };
+
+  getOrders = async () => {
+    const returnValue = await this.adminRepositories.getOrders();
+
+    return returnValue;
+  };
+
+  changeStatus = async (orderId, status) => {
+    if (status === '배송완료')
+      return { code: 400, message: '요청이 잘못되었습니다' };
+
+    let changeStatus = status;
+    switch (changeStatus) {
+      case '발송준비':
+        changeStatus = '배송시작';
+        break;
+      case '배송시작':
+        changeStatus = '배송중';
+        break;
+      case '배송중':
+        changeStatus = '배송완료';
+        break;
+    }
+
+    const returnValue = await this.adminRepositories.changeStatus(
+      orderId,
+      changeStatus
+    );
 
     return returnValue;
   };

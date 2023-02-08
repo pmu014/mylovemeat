@@ -17,21 +17,24 @@ class UsersService {
     
             const user = await this.usersRepository.findUser(account);
     
-            if (user.length) {
+            if (user) {
                 return {
                     code: 409,
-                    errorMessage: '이미 존재하는 아이디 입니다.',
+                    message: '이미 존재하는 아이디 입니다.',
             }}
+
             if (password.search(re_password) === -1) {
                 return {
                     code: 400,
-                    errorMessage: '비밀번호를 4~10자 영문, 숫자 조합으로 입력해주세요.',
+                    message: '비밀번호를 4~10자 영문, 숫자 조합으로 입력해주세요.',
             }}
+
             if (phone.search(re_phone) === -1) {
                 return {
                     code: 400,
-                    errorMessage: '핸드폰 번호를 숫자, -을 포함한 휴대전화 형식에 맞게 입력해주세요.',
+                    message: '핸드폰 번호를 숫자, -을 포함한 휴대전화 형식에 맞게 입력해주세요.',
             }}
+
             const encryptionPassword = await this.hashedPassword.createHashedPassword(
                 password
             )

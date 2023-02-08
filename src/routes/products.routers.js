@@ -10,5 +10,4 @@ router.get('/:productId', userAuthToken,productsController.getProduct);
 
 router.get('/', userAuthToken,productsController.getProducts);
 
-
 module.exports = router;
