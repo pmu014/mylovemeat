@@ -19,6 +19,27 @@ class  CartsService {
         }}
         }
     
+    cartDelete = async (userId, productId) => {
+        const returnValue = await this.cartsRepository.cartDelete(userId, productId);
+
+        if (!returnValue) {
+            return { code: 404, message: '상품을 찾을 수 없습니다' };
+        }
+
+        return returnValue;
+
+    }    
+
+    cartPut = async (userId, productId, quantity) => {
+        const returnValue = await this.cartsRepository.cartPut(userId, productId, quantity);
+
+        if (!returnValue) {
+            return { code: 404, message: '상품을 찾을 수 없습니다' };
+        }
+
+        return returnValue;
+
+    }    
     
 }
 

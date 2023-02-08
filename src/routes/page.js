@@ -1,6 +1,7 @@
 const express = require('express');
 
 const adminAuthToken = require('../middlewares/admin-auth-middleware');
+const userAuthToken = require('../middlewares/user-auth-middleware');
 
 const router = express.Router();
 
@@ -17,19 +18,19 @@ router.get('/', (req, res) => {
 });
 
 router.get('/user_signup', (req, res) => {
-  res.render('user-signup');
+  res.render('users/user-signup');
 });
 
 router.get('/user_login', (req, res) => {
-  res.render('user-login');
+  res.render('users/user-login');
 });
 
-router.get('/cart_show', (req, res) => {
-  res.render('cart-show');
+router.get('/cart_show', userAuthToken, (req, res) => {
+  res.render('carts/cart-show');
 });
 
-router.get('/order_order', (req, res) => {
-  res.render('order-order');
+router.get('/order_order', userAuthToken, (req, res) => {
+  res.render('orders/order-order');
 });
 
 router.get('/admin_register', adminAuthToken, (req, res) => {

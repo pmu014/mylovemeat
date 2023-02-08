@@ -35,11 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
       
         sumPrice += parseInt(productPrice)
         let container1 =`<div class="container1">
-                          <div class="img">${img}</div>
+                          <div class="img"><img src="/images/${img}"></div>
                           <div class="name">${name}</div>
-                          <div class="price">${price}</div>
+                          <div class="price">${parseInt(price).toLocaleString()}</div>
                           <div class="quantity">수량 : ${quantity}</div>
-                          <div class="productPrice">상품 금액 : ${productPrice}</div>
+                          <div class="productPrice">상품 금액 : ${parseInt(productPrice).toLocaleString()}</div>
                         </div>`
 
         list1.insertAdjacentHTML('beforeend', container1);
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>`
       list2.insertAdjacentHTML('beforeend', container2);
       
-      let container3 = `<div>주문금액 : ${sumPrice}</div>`
+      let container3 = `<div>주문 금액 : ${parseInt(sumPrice).toLocaleString()}</div>`
       list3.insertAdjacentHTML('beforebegin', container3);
 
   
@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const inputUserName = document.getElementById('userName').value;
         const inputPhone = document.getElementById('phone').value;
         const inputAddress = document.getElementById('address').value;
-        // console.log(inputUserName);
             axios({
               method: 'post',
               url: '/api/orders',

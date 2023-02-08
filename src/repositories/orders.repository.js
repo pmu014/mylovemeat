@@ -60,7 +60,7 @@ class OrdersRepository {
                         productId: data[i].productId,
                         userId,
                         quantity: data[i].quantity,
-                        status: "발송 준비"
+                        status: "발송준비"
                     }
                     );
                 returnValues.push(returnValue)
@@ -70,7 +70,7 @@ class OrdersRepository {
             console.log("OrderOrder-err", err);
             return {
                 code: 400,
-                errorMessage: '요청한 데이터 형식이 올바르지 않습니다.',
+                message: '요청한 데이터 형식이 올바르지 않습니다.',
         }}
         }
 }

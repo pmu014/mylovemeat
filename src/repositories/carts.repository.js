@@ -2,10 +2,12 @@
 const { Cart } = require("../db/models");
 const { User } = require("../db/models");
 const { Product } = require("../db/models");
+const { Op } = require("sequelize");
 
 class CartsRepository {
 
     cartGet = async(userId) => {
+        try {
         const returnValue = []
         const cartFind = await Cart.findAll({ 
             where: {userId}
@@ -28,11 +30,52 @@ class CartsRepository {
                 img,
                 desc
             })
+            }
+            console.log(returnValue);
+            return returnValue;
+        } catch (err) {
+            console.log('cartsRepositories delProduct :', err);
+            return { code: 500, message: '서버가 준비되지 않았습니다.' };
         }
-        console.log(returnValue);
-        return returnValue;
-    }
-   
+        }
+
+    cartDelete = async (userId, productId) => {
+        try {
+            const returnValue = await Cart.destroy({
+                where: {   
+                    [Op.and]: [
+                    { userId },
+                    { productId }
+                    ] },
+            });
+
+            return returnValue;
+
+        } catch (err) {
+            console.log('cartsRepositories delProduct :', err);
+            return { code: 500, message: '서버가 준비되지 않았습니다.' };
+        }
+    }    
+
+    cartPut = async (userId, productId, quantity) => {
+        try {
+            const returnValue = await Cart.update(
+                {quantity},
+                
+                {where: {   
+                    [Op.and]: [
+                    { userId },
+                    { productId }
+                    ] }}
+            );
+
+            return returnValue;
+
+        } catch (err) {
+            console.log('cartsRepositories putProduct :', err);
+            return { code: 500, message: '서버가 준비되지 않았습니다.' };
+        }
+    }    
 }
 
 module.exports = CartsRepository;

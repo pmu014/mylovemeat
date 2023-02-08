@@ -14,7 +14,7 @@ class  OrdersService {
             console.log("OrderOrder-err", err);
             return {
                 code: 400,
-                errorMessage: '요청한 데이터 형식이 올바르지 않습니다.',
+                message: '요청한 데이터 형식이 올바르지 않습니다.',
         }}
         }
     
@@ -28,7 +28,7 @@ class  OrdersService {
             console.log("OrderOrder-err", err);
             return {
                 code: 400,
-                errorMessage: '요청한 데이터 형식이 올바르지 않습니다.',
+                message: '요청한 데이터 형식이 올바르지 않습니다.',
         }}
         }
     
