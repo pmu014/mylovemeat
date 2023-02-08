@@ -29,6 +29,7 @@ router.get('/cart_show', userAuthToken, (req, res) => {
   res.render('carts/cart-show');
 });
 
+
 router.get('/order_order', userAuthToken, (req, res) => {
   res.render('orders/order-order');
 });
@@ -51,7 +52,7 @@ router.get('/admin_login', (req, res) => {
   res.render('admins/admin-login');
 });
 
-router.get('/admin_index', (req, res) => {
+router.get('/admin_index', adminAuthToken, (req, res) => {
   res.render('admins/admin-index');
 });
 
@@ -63,6 +64,10 @@ router.get('/admin_edit_product', adminAuthToken, (req, res) => {
   const { productId } = req.query;
 
   res.render('admins/admin-edit-product', { productId });
+});
+
+router.get('/admin_order', adminAuthToken, (req, res) => {
+  res.render('admins/admin-order');
 });
 
 router.get('/mypage', (req, res) => {

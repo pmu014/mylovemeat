@@ -136,6 +136,29 @@ class AdminsController {
 
     res.status(204).end();
   };
+
+  getOrders = async (req, res) => {
+    const returnValue = await this.adminsServices.getOrders();
+
+    res.status(200).json({ returnValue });
+  };
+
+  changeStatus = async (req, res) => {
+    const { status, orderId } = req.body;
+
+    if (!status || !orderId) {
+      return res.status(400).json({ message: '요청이 잘못되었습니다' });
+    }
+
+    const returnValue = await this.adminsServices.changeStatus(orderId, status);
+
+    if (checkErrorMessage(returnValue)) {
+      return res
+        .status(returnValue.code)
+        .json({ errorMessage: returnValue.message });
+    }
+    res.status(201).json({ message: '주문 상태가 변경되었습니다.' });
+  };
 }
 
 module.exports = AdminsController;

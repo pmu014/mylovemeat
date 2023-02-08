@@ -38,7 +38,6 @@ const adminAuthToken = (req, res, next) => {
     res.cookie('refreshToken', refreshToken);
   }
 
-  console.log(accessToken);
   req.tokenInfo = accessTokenInfo;
   next();
 };

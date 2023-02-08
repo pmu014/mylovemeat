@@ -1,7 +1,8 @@
 class AdminRepositories {
-  constructor(Admin, Product) {
+  constructor(Admin, Product, Order) {
     this.Admin = Admin;
     this.Product = Product;
+    this.Order = Order;
   }
 
   registerAdmin = async (account, password, name, salt) => {
@@ -74,18 +75,40 @@ class AdminRepositories {
 
   delProduct = async (productId) => {
     try {
-      // const { img } = await this.Product.findOne({
-      //   where: { id: productId },
-      //   attributes: ['img'],
-      // });
       const returnValue = await this.Product.destroy({
         where: { id: productId },
       });
 
       return returnValue;
-      // return { returnValue, img };
     } catch (err) {
       console.log('AdminsRepositories delProduct :', err);
+      return { code: 500, message: '서버가 준비되지 않았습니다.' };
+    }
+  };
+
+  getOrders = async () => {
+    try {
+      const returnValue = await this.Order.findAll({
+        include: { model: this.Product, paranoid: false },
+      });
+
+      return returnValue;
+    } catch (err) {
+      console.log('repositories getOrders: ', err);
+      return { code: 500, message: '서버가 준비되지 않았습니다.' };
+    }
+  };
+
+  changeStatus = async (orderId, status) => {
+    try {
+      const returnValue = await this.Order.update(
+        { status },
+        { where: { id: orderId } }
+      );
+
+      return returnValue;
+    } catch (err) {
+      console.log('repositories changeStatus: ', err);
       return { code: 500, message: '서버가 준비되지 않았습니다.' };
     }
   };

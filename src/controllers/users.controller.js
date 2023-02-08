@@ -8,12 +8,13 @@ class UsersController {
     createUser = async (req, res) => {
             try {
             const { account, password, name, address, phone } = req.body;
-            if (!account || !password || !name || !address || !phone){
+
+            if (!account || !password || !name || !address || !phone) {
                 return res
                 .status(400)
-                .json({ errorMessage: "요청이 잘못되었습니다" });
-                
+                .json({ errorMessage: '요청이 잘못 되었습니다.' });
             }
+
             const returnValue = await this.usersService.createUser(
                 account,
                 password,
