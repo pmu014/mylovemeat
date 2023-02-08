@@ -38,13 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const updateBtns = document.getElementsByClassName('updateBtn');
       const quantities = document.getElementsByClassName('quantity');
-      console.log(quantities);
 
       for (let i = 0; i < updateBtns.length; i++) {
         const productId = updateBtns[i].value;
         updateBtns[i].addEventListener('click', () => {
           const quantity = document.getElementById(`quantity${i}`).value;
-          console.log(productId);
+
           axios({
             method: 'put',
             url: '/api/carts/' + productId,

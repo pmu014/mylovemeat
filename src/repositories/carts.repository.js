@@ -30,7 +30,6 @@ class CartsRepository {
           desc,
         });
       }
-      console.log(returnValue);
       return returnValue;
     } catch (err) {
       console.log('cartsRepositories cartGet :', err);

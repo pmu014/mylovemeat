@@ -14,6 +14,10 @@ function getmypage() {
       $('#phoneInput').attr('value', user.phone);
       $('#addressInput').attr('value', user.address);
     },
+    error: function(){
+      window.location.href = '/user_login';
+    }
+
   });
 }
 
