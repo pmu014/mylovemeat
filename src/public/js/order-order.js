@@ -15,13 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
   })
     .then((response) => {
       const data = response.data.data;
-      // console.log(data);
       const userName = data[0].userName;
       const address = data[0].address;
       const phone = data[0].phone;
-      // console.log(userName);
-      // console.log(address);
-      // console.log(phone);
+
       let sumPrice = 0;
       for (let i = 1; i < data.length; i++) {
         const quantity = data[i].quantity;
@@ -70,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const orderBtn = document.getElementById('orderBtn');
       orderBtn.addEventListener('click', () => {
-        console.log(data);
         const inputUserName = document.getElementById('userName').value;
         const inputPhone = document.getElementById('phone').value;
         const inputAddress = document.getElementById('address').value;
@@ -94,8 +90,5 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     })
     .catch((response) => {
-      // const data = response.response.data
-      // console.log(data);
-      // alert(data.errorMessage);
     });
 });

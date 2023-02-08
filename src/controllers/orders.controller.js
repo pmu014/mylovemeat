@@ -8,8 +8,6 @@ class OrdersController {
       try {
 
       const { userId } =req.tokenInfo;
-      // // const  userId  = "26"
-      // console.log("123", userId);
       
       const returnValue = await this.ordersService.cartGet(
         userId

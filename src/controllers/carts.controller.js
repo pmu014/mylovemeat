@@ -27,7 +27,6 @@ class CartsController {
   cartDelete = async (req, res) => {
     const { userId } = req.tokenInfo;
     const { productId } = req.params;
-    console.log(userId, productId);
 
     const returnValue = await this.cartsService.cartDelete(userId, productId);
 
@@ -43,7 +42,6 @@ class CartsController {
     const { userId } = req.tokenInfo;
     const { productId } = req.params;
     const { quantity } = req.body;
-    console.log(userId, productId, quantity);
 
     const returnValue = await this.cartsService.cartPut(
       userId,

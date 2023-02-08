@@ -12,6 +12,4 @@ router.delete('/:productId', userAuthToken, cartsController.cartDelete);
 router.put('/:productId', userAuthToken, cartsController.cartPut);
 router.post('/',userAuthToken,productsController.cartProduct);
 
-// router.post('/login', cartsController.loginUser);
-
 module.exports = router;

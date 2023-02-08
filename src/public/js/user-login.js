@@ -25,3 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   });
 });
+function signup() {
+  window.location.href = '/user_signup';
+}

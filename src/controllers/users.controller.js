@@ -48,8 +48,6 @@ class UsersController {
 
     res.cookie('accessToken', returnValue.accessToken);
     res.cookie('refreshToken', returnValue.refreshToken);
-    console.log(returnValue.accessToken);
-    console.log(returnValue.refreshToken);
     res.status(200).json({ message: '로그인 되었습니다' });
   };
 

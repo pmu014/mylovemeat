@@ -69,7 +69,7 @@ router.get('/admin_order', adminAuthToken, (req, res) => {
   res.render('admins/admin-order');
 });
 
-router.get('/mypage', (req, res) => {
+router.get('/mypage', userAuthToken, (req, res) => {
   res.render('mypage');
 });
 
