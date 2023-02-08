@@ -1,0 +1,82 @@
+* {
+    font-family: 'Do Hyeon', sans-serif;
+  }
+  h1{
+    margin-top: 40px;
+  }
+  hr{
+    border:solid 1px;
+  }
+  .products-main{
+    border: 2px solid lavender;
+    width: 1470px;
+    margin: auto;
+    margin-top: 100px;
+    display: flex;
+    flex-wrap: wrap;
+  
+  }
+  .main-css{
+    max-width:1450px;
+    /* margin : 100px 0px 0px 220px; */
+    margin:auto;
+    margin-top:100px;
+    display: flex;
+    justify-content: space-between;
+   
+  }
+  
+  .products-img{
+    margin: 0px 50px 50px 0px;
+    text-align: center;
+    font-size: large;
+  }
+  .btn-css{
+    width: 350px;
+    height: 100px;
+  }
+  .btn-css2{
+    margin-top: 10px;
+  }
+  .my-btn{
+    width:110px
+  }
+  
+  .products-detail-div{
+    /* border: 2px solid lavender; */
+    width: 860px;
+    margin:  auto;
+    margin-top: 100px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .products-detail{
+    /* border: 2px solid lavender; */
+    width:400px;
+    margin-top: 220px;
+  }
+  .products-detail-form{
+    width:320px;
+    height: 47px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .products-detail-form-description{
+    width:770px;
+    height: 200px;
+    text-align: center;
+  }
+  .products-detail-btn-div{
+    /* border: 2px solid lavender;  */
+    width: 800px;
+    margin: auto;
+    display: flex;
+    margin-left:500px;
+  }
+  .products-detail-btn{
+    margin: auto;
+    width: 370px;
+    height: 50px;
+    margin-right: 10px;
+    margin-top: 30px;
+  }
