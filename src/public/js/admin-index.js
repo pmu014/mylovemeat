@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = response.data;
 
       const createHTML = new Promise((resolve, reject) => {
-        for (const item of data.returnValue) {
+        for (const item of data.products) {
           let tempHtml = ``;
           tempHtml = `<div class="items">
                         <div class="itemImage"><img src="/images/${item.img}"></div>

@@ -6,8 +6,8 @@ const router = express.Router();
 const productsController = new ProductsController();
 const userAuthToken = require('../middlewares/user-auth-middleware');
 
-router.get('/:productId', userAuthToken,productsController.getProduct);
+router.get('/:productId', productsController.getProduct);
 
-router.get('/', userAuthToken,productsController.getProducts);
+router.get('/', productsController.getProducts);
 
 module.exports = router;

@@ -6,6 +6,7 @@ const UsersController = require('../controllers/users.controller');
 const usersController = new UsersController();
 const userAuthToken = require('../middlewares/user-auth-middleware');
 
+router.post('/logout', usersController.logoutUser);
 router.post('/login', usersController.loginUser);
 router.post('/', usersController.createUser);
 

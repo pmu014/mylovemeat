@@ -38,6 +38,11 @@ const adminAuthToken = (req, res, next) => {
     res.cookie('refreshToken', refreshToken);
   }
 
+  if (!accessTokenInfo.rating) {
+    res.send(
+      "<script>alert('관리자만 접속할 수 있습니다.');location.href='/products';</script>"
+    );
+  }
   req.tokenInfo = accessTokenInfo;
   next();
 };

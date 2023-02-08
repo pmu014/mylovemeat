@@ -10,15 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
       url: '/api/users/login',
       data: {
         account,
-        password
+        password,
       },
     })
       .then((response) => {
         const data = response.data;
         alert(data.message);
+        window.location.href = '/products';
       })
       .catch((response) => {
-        const data = response.response.data
+        const data = response.response.data;
         console.log(data);
         alert(data.errorMessage);
       });

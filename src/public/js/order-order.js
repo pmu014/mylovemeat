@@ -4,7 +4,6 @@
 //   console.log(dd)
 // })
 document.addEventListener('DOMContentLoaded', () => {
-  
   const list1 = document.getElementById('list1');
   const list2 = document.getElementById('list2');
   const list3 = document.getElementById('list3');
@@ -12,35 +11,38 @@ document.addEventListener('DOMContentLoaded', () => {
   axios({
     method: 'get',
     url: '/api/orders',
-    data: {
-    },
+    data: {},
   })
     .then((response) => {
       const data = response.data.data;
       // console.log(data);
-      const userName = data[0].userName
-      const address = data[0].address
-      const phone = data[0].phone
+      const userName = data[0].userName;
+      const address = data[0].address;
+      const phone = data[0].phone;
       // console.log(userName);
       // console.log(address);
       // console.log(phone);
-      let sumPrice = 0
+      let sumPrice = 0;
       for (let i = 1; i < data.length; i++) {
-        const quantity = data[i].quantity
-        const productId = data[i].productId
-        const name = data[i].name
-        const price = data[i].price
-        const img = data[i].img
-        const productPrice = price*quantity
-      
-        sumPrice += parseInt(productPrice)
-        let container1 =`<div class="container1">
+        const quantity = data[i].quantity;
+        const productId = data[i].productId;
+        const name = data[i].name;
+        const price = data[i].price;
+        const img = data[i].img;
+        const productPrice = price * quantity;
+
+        sumPrice += parseInt(productPrice);
+        let container1 = `<div class="container1">
                           <div class="img"><img src="/images/${img}"></div>
                           <div class="name">${name}</div>
-                          <div class="price">${parseInt(price).toLocaleString()}</div>
+                          <div class="price">${parseInt(
+                            price
+                          ).toLocaleString()}</div>
                           <div class="quantity">수량 : ${quantity}</div>
-                          <div class="productPrice">상품 금액 : ${parseInt(productPrice).toLocaleString()}</div>
-                        </div>`
+                          <div class="productPrice">상품 금액 : ${parseInt(
+                            productPrice
+                          ).toLocaleString()}</div>
+                        </div>`;
 
         list1.insertAdjacentHTML('beforeend', container1);
       }
@@ -58,41 +60,42 @@ document.addEventListener('DOMContentLoaded', () => {
                             <label for="account" class="form-label">배송지</label>
                             <input type="text" id="address" class="address" value="${address}">
                           </div>  
-                        </div>`
+                        </div>`;
       list2.insertAdjacentHTML('beforeend', container2);
-      
-      let container3 = `<div>주문 금액 : ${parseInt(sumPrice).toLocaleString()}</div>`
+
+      let container3 = `<div>주문 금액 : ${parseInt(
+        sumPrice
+      ).toLocaleString()}</div>`;
       list3.insertAdjacentHTML('beforebegin', container3);
 
-  
       const orderBtn = document.getElementById('orderBtn');
       orderBtn.addEventListener('click', () => {
         console.log(data);
         const inputUserName = document.getElementById('userName').value;
         const inputPhone = document.getElementById('phone').value;
         const inputAddress = document.getElementById('address').value;
-            axios({
-              method: 'post',
-              url: '/api/orders',
-              data: {
-                name:inputUserName,
-                phone:inputPhone,
-                address:inputAddress,
-                data
-              },
-            })
-              .then(() => {
-                alert('주문이 완료되었습니다.');
-              })
-              .catch((response) => {
-                console.log(response);
-              });
+        axios({
+          method: 'post',
+          url: '/api/orders',
+          data: {
+            name: inputUserName,
+            phone: inputPhone,
+            address: inputAddress,
+            data,
+          },
+        })
+          .then(() => {
+            alert('주문이 완료되었습니다.');
+            window.location.href = '/products';
+          })
+          .catch((response) => {
+            console.log(response);
           });
+      });
     })
     .catch((response) => {
       // const data = response.response.data
       // console.log(data);
       // alert(data.errorMessage);
     });
-  });
-
+});

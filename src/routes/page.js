@@ -29,7 +29,6 @@ router.get('/cart_show', userAuthToken, (req, res) => {
   res.render('carts/cart-show');
 });
 
-
 router.get('/order_order', userAuthToken, (req, res) => {
   res.render('orders/order-order');
 });

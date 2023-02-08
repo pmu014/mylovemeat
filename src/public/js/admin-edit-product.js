@@ -14,10 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
     .then((response) => {
       const data = response.data;
 
-      inputName.setAttribute('value', data.returnValue.name);
-      inputPrice.setAttribute('value', data.returnValue.price);
-      inputDesc.append(data.returnValue.description);
-      inputQuantity.setAttribute('value', data.returnValue.quantity);
+      inputName.setAttribute('value', data.products.name);
+      inputPrice.setAttribute('value', data.products.price);
+      inputDesc.append(data.products.description);
+      inputQuantity.setAttribute('value', data.products.quantity);
 
       editProductBtn.addEventListener('click', () => {
         inputName = document.getElementById('inputName').value;
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (inputImage.files[0]) {
           formData.append('inputImage', inputImage.files[0]);
         } else {
-          formData.append('inputImage', data.returnValue.img);
+          formData.append('inputImage', data.products.img);
         }
 
         formData.append('inputDesc', inputDesc);

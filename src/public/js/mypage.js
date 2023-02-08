@@ -16,3 +16,19 @@ function getmypage() {
     },
   });
 }
+
+function logOut() {
+  if (confirm('로그아웃 하시겠습니까?')) {
+    alert('확인을 누르셨습니다.');
+    $.ajax({
+      type: 'POST',
+      url: '/api/users/logout',
+      data: {},
+      success: function () {
+        window.location.href = '/user_login';
+      },
+    });
+  } else {
+    alert('취소를 누르셨습니다.');
+  }
+}

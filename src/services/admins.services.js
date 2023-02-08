@@ -17,7 +17,7 @@ class AdminsServices {
   registerAdmin = async (inputAccount, inputPassword, inputName) => {
     const admin = await this.adminRepositories.getAdmin(inputAccount);
 
-    if (admin.length) {
+    if (admin) {
       return { code: 409, message: '아이디가 이미 존재합니다' };
     }
 

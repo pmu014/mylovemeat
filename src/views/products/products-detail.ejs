@@ -10,7 +10,7 @@
   <script src="/js/products-detail.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  
+
   <link rel="stylesheet" href="/css/products.css">
   <title>상세페이지</title>
 </head>
@@ -18,35 +18,27 @@
 <body>
   <div class="main-css">
     <h1>전자상거래</h1>
-      <div class="btn-css">
-        <button class="my-btn btn btn-outline-danger" onclick="login()">로그인</a></button>
-        <button class="my-btn btn btn-outline-danger" onclick="mypage()">마이페이지</a></button>
-        <button class="my-btn btn btn-outline-danger" >장바구니</a></button>
-          <div class="btn-css2">
-            <button class="my-btn btn btn-outline-danger" onclick="signup()">회원가입</a></button>
-            <button class="my-btn btn btn-outline-danger" onclick="logOut()">로그아웃</a></button>
-          </div>
+    <div class="btn-css">
+      <button class="my-btn btn btn-outline-danger" onclick="login()">로그인</a></button>
+      <button class="my-btn btn btn-outline-danger" onclick="mypage()">마이페이지</a></button>
+      <button class="my-btn btn btn-outline-danger"><a href="/cart_show">장바구니</a></button>
+      <div class="btn-css2">
+        <button class="my-btn btn btn-outline-danger" onclick="signup()">회원가입</a></button>
+        <button class="my-btn btn btn-outline-danger" onclick="logOut()">로그아웃</a></button>
       </div>
+    </div>
   </div>
   <hr>
-  
-  <div id="products-detail" class="products-detail-div" >
+
+  <div id="products-detail" class="products-detail-div">
   </div>
   <div class="products-detail-btn-div">
     <button type="button" class="products-detail-btn btn btn-outline-danger" onclick="cart()"> 장바구니에 넣기</a></button>
-    <button type="button" class="products-detail-btn btn btn-outline-danger" onclick="order()">주문하기</a></button>
   </div>
 </body>
-<script
-src="https://code.jquery.com/jquery-3.5.1.js"
-integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-crossorigin="anonymous"
-></script>
-<script
-src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-crossorigin="anonymous"
-></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+  integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 
 </html>
-
