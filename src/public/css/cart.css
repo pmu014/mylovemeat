@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+* {
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+#cartBox > h1 {
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+
+#cartBox {
+  width: 900px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+
+  border: 2px solid lavender;
+  border-radius: 20px;
+
+  box-shadow: 3px 3px 5px lavender;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.container1 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 10px;
+}
+
+.container2 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.img {
+  width: 150px;
+  text-align: center;
+}
+
+.img > img {
+  width: 100%;
+}
+.name {
+  width: 150px;
+  text-align: center;
+}
+.price {
+  width: 150px;
+  text-align: center;
+}
+.quantityName {
+  width: 40px;
+  text-align: center;
+}
+.quantity {
+  width: 50px;
+  text-align: center;
+}
+.productPrice {
+  width: 150px;
+  text-align: center;
+}
+
+#buyBtn {
+  width: 120px;
+  margin: 0 auto;
+}
+.updateBtn {
+  width: 50px;
+  margin-left: 5px;
+}
+.deleteBtn {
+  width: 50px;
+  margin-left: 5px;
+}
