@@ -31,7 +31,7 @@ router.put(
 
 router.post('/login', adminsController.loginAdmin);
 
-router.get('/orders', adminsController.getOrders);
+router.get('/orders', adminAuthToken, adminsController.getOrders);
 
 router.put('/orders', adminAuthToken, adminsController.changeStatus);
 

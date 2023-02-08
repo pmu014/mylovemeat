@@ -95,7 +95,7 @@ class AdminRepositories {
       return returnValue;
     } catch (err) {
       console.log('repositories getOrders: ', err);
-      return err;
+      return { code: 500, message: '서버가 준비되지 않았습니다.' };
     }
   };
 
@@ -109,6 +109,7 @@ class AdminRepositories {
       return returnValue;
     } catch (err) {
       console.log('repositories changeStatus: ', err);
+      return { code: 500, message: '서버가 준비되지 않았습니다.' };
     }
   };
 }

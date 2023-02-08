@@ -28,7 +28,7 @@ router.get('/cart_show', (req, res) => {
   res.render('cart-show');
 });
 
-router.get('/order_order', (req, res) => {
+router.get('/order_order', adminAuthToken, (req, res) => {
   res.render('order-order');
 });
 
@@ -50,7 +50,7 @@ router.get('/admin_login', (req, res) => {
   res.render('admins/admin-login');
 });
 
-router.get('/admin_index', (req, res) => {
+router.get('/admin_index', adminAuthToken, (req, res) => {
   res.render('admins/admin-index');
 });
 
