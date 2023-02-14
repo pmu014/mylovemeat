@@ -1,53 +1,40 @@
-
-const { Cart } = require("../db/models");
-const { User } = require("../db/models");
-const { Product } = require("../db/models");
-const { Order } = require("../db/models");
+const { Cart, User, Product, Order } = require("../db/models");
 
 class OrdersRepository {
-
-    cartGet = async(userId) => {
-        const returnValue = []
-        const cartFind = await Cart.findAll({ 
+    constructor(Cart, User, Product, Order) {
+        this.Cart = Cart;
+        this.User = User;
+        this.Product = Product;
+        this.Order = Order;
+    }
+    cartFind =async(userId)=>{
+        const cartFind = await this.Cart.findAll({ 
+            // attributes: ['productId'],
+            raw: true,
             where: {userId}
         });
-        const userFind = await User.findOne({ 
+        console.log("cartFind", cartFind);
+        return cartFind
+    }
+
+    userFind = async(userId) => {
+        const userFind = await this.User.findOne({ 
+            raw: true,
             where: {id : userId}
         });
-        const userName = userFind.dataValues.name;
-        const address = userFind.dataValues.address;
-        const phone = userFind.dataValues.phone;
-        returnValue.push({
-            userName,
-            address,
-            phone}
-        )
-
-        for (let i = 0; i < cartFind.length; i++){
-            const quantity = cartFind[i].dataValues.quantity;
-            const productId = cartFind[i].dataValues.productId;
-            const productFind = await Product.findOne({ 
-                where: {id : productId},
-                paranoid: false
-            });
-
-            const name = productFind.dataValues.name;
-            const price = productFind.dataValues.price;
-            const img = productFind.dataValues.img;
-            const desc = productFind.dataValues.description;
-            
-
-            returnValue.push({
-                productId,
-                quantity,
-                name,
-                price,
-                img,
-                desc
-            })
-        }
-        return returnValue;
+        console.log("userFind", userFind)
+        return userFind
     }
+    productFind = async(productIdList) => {
+        const productFind = await this.Product.findAll({
+            raw: true, 
+            where: {id : productIdList},
+            paranoid: false
+        });
+        console.log("productFind", productFind)
+        return productFind
+    }
+    
     orderPost = async (name, phone, address, data, userId) => {
         try {
             const returnValues = []
