@@ -24,14 +24,11 @@ class  OrdersService {
                 address,
                 phone}
             )
-            
-            const productIdList = []
-            for (let i = 0; i < cartFind.length; i++){
-                productIdList.push(cartFind[i].productId)
-                }
-                
+            //carts.map(cart => cart.id)
+            const cartIds = cartFind.map(cart => cart.id)
+
             const productFind = await this.ordersRepository.productFind(
-                productIdList
+                cartIds
             );
 
             for (let i = 0; i < productFind.length; i++){
@@ -54,9 +51,6 @@ class  OrdersService {
             console.log(returnValue);
             return returnValue;
 
-
-
-
             
         } catch (err) {
             console.log("OrderCartGet-err", err);
@@ -68,8 +62,22 @@ class  OrdersService {
     
         orderPost = async (name, phone, address, data, userId) => {
         try {            
+            const returnValues = []
+            for (let i = 1; i < data.length; i++){
+                const dataS = {
+                name,
+                phone,
+                address,
+                productId: data[i].productId,
+                userId,
+                quantity: data[i].quantity,
+                status: "발송준비"
+                }
+                returnValues.push(dataS)
+            }
+
             const returnValue = await this.ordersRepository.orderPost(
-                name, phone, address, data, userId
+                returnValues
             );
             return returnValue;
         } catch (err) {

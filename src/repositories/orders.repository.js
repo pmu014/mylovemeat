@@ -25,36 +25,22 @@ class OrdersRepository {
         console.log("userFind", userFind)
         return userFind
     }
-    productFind = async(productIdList) => {
+    productFind = async(cartIds) => {
         const productFind = await this.Product.findAll({
             raw: true, 
-            where: {id : productIdList},
+            where: {id : cartIds},
             paranoid: false
         });
         console.log("productFind", productFind)
         return productFind
     }
     
-    orderPost = async (name, phone, address, data, userId) => {
+    orderPost = async (returnValues) => {
         try {
-            const returnValues = []
-            for (let i = 1; i < data.length; i++){
-                let returnValue = await Order.create(
-                    {
-                        name,
-                        phone,
-                        address,
-                        productId: data[i].productId,
-                        userId,
-                        quantity: data[i].quantity,
-                        status: "발송준비"
-                    }
-                    );
-                returnValues.push(returnValue)
-                } 
-            return returnValues;
+            const returnValue = await Order.bulkCreate(returnValues);
+            return returnValue;
         } catch (err) {
-            console.log("OrderOrder-err", err);
+            console.log("OrderPost-err", err);
             return {
                 code: 400,
                 message: '요청한 데이터 형식이 올바르지 않습니다.',
